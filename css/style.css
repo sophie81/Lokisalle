@@ -1,0 +1,228 @@
+/**************************************************** GENERAL ************************************************/
+*{ margin: 0; }
+body{  background-color: #f8f8f8; font-family : Raleway, sans-serif; font-size: 12px; }
+a{ text-decoration: none; color: #000; }
+h1{margin-top: 0;}
+/**************************************************** HAUT ************************************************/
+header { text-align: center;}
+header  span{ color: #fff; font-weight: bold; text-transform: uppercase; margin-right: 5%; }
+header  a{text-decoration: none; padding: 5px 5px; }
+header  nav  a:hover, a.active{ background: #04baf6; }
+.navbar-top-links { margin-right: 0; }
+.navbar-top-links li { display: inline-block; }
+.navbar-top-links li:last-child { margin-right: 15px; }
+.navbar-top-links li a { padding: 15px; min-height: 50px; }
+.sidebar .sidebar-nav.navbar-collapse { padding-left: 0; padding-right: 0; }
+.sidebar ul li { border-bottom: 1px solid #e7e7e7; }
+.sidebar ul li a.active { background-color: #eeeeee; }
+.dropdown:hover .dropdown-menu { display: block; margin: 0;}
+.dropdown .dropdown-menu li { width: 100%; margin-right: 0;}
+.dropdown div.dropdown-toggle { padding: 15px; min-height: 50px;}
+.navbar-default.sidebar { display: none; }
+.navbar-top-links li a {font-size: 14px; color: #777;}
+
+@media (min-width: 768px) { .sidebar { z-index: 1; position: absolute; width: 250px; margin-top: 51px; } .navbar-top-links .dropdown-messages, .navbar-top-links .dropdown-tasks, .navbar-top-links .dropdown-alerts {margin-left: auto; }}
+
+/**************************************************** MILIEU ************************************************/
+
+#wrapper {
+  width: 100%;
+}
+#page-wrapper {
+  padding: 0 15px;
+  min-height: 568px;
+  background-color: white;
+}
+
+#page-wrapper.front { padding: 0; margin: 0; }
+@media (min-width: 768px) {
+  #page-wrapper {
+    position: inherit;
+    margin: 0 0 0 250px;
+    padding: 0 30px;
+    border-left: 1px solid #e7e7e7;
+  }
+}
+
+.bo .fa { font-size: 25px; }
+
+/**************************************************** BAS ************************************************/
+footer{ background: #000; color: white; text-align: center; padding: 7px 0;}
+footer ul { list-style: none; margin: 0; padding: 0; }
+footer ul li { display: inline-block; }
+footer ul li a { color: #FFF; }
+footer ul li p { margin-bottom: 0; }
+/**************************************************** GENERAL ************************************************/
+.erreur{ color: red; text-align: center; text-transform: uppercase; font-weight: bold; font-size: 15px; }
+.validation{ background: #669933; padding: 5px; margin: 5px; }
+.cadre{ border: 1px solid #c0c0c0; width: 30%;}
+.cadre  h2{ background: #c0c0c0; margin: 0; text-align: center; font-size: 15px; padding: 5px; }
+.cadre  p{ padding: 10px; }
+.centre{text-align: center;}
+/**************************************************** BOUTIQUE ************************************************/
+.boutique-gauche{ float: left; width: 30%; background: #f2f2f2; min-height: 500px; margin-right: 10%; padding-top: 10px; text-align: center; }
+.boutique-gauche  ul{ list-style: none; padding: 0; }
+.boutique-gauche  ul  li  a{ display: block; padding: 10px; }
+.boutique-gauche  ul  li  a:hover{ background: #04baf6; color: #fff; }
+.boutique-droite{float: left; width: 60%; }
+.boutique-produit{ float: left; width: 30%; text-align: center; padding: 5%; border-bottom: 1px solid #c0c0c0; }
+.boutique-produit:hover{ background: #c0c0c0; }
+/**************************************************** BOUTIQUE ************************************************/
+
+
+
+
+
+/**************************************************** Formulaire ************************************************/
+form{
+	padding: 20px;
+	overflow: hidden;
+}
+
+form label{
+	float: left; 
+	height: 40px; 
+	line-height: 40px; 
+	vertical-align: middle; 
+	margin-top: 10px;
+}
+
+form input, form select, form textarea{
+	display: block;
+    width: 100%;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+
+form input[type='file']{
+	text-indent: 0;
+	padding-top: 10px;
+	line-height: 20px;
+	padding-left: 5%;
+	width:65%;
+	height: 30px;
+	background-color: #FFF;
+}
+
+form textarea{
+	height: 120px; 
+	resize: none;
+}
+
+form input:focus{
+	border: 1px solid black;
+}
+
+form input[type='submit']:hover{
+	cursor: pointer;
+}
+
+form input[type="submit"]:hover{
+	background-color: grey; 
+	color: white; 
+	transition: 1.5s;
+	
+}
+
+table{ border-collapse: collapse;}
+hr{
+	margin: 20px 0;
+}
+h1{margin-bottom: 20px;}
+table tr td{
+text-align: center;
+}
+td, th{ padding: 5px; }
+
+a.btn-danger {
+	width: 100%;
+	margin-top: 10px;
+}
+
+/******** PROFIL *******/
+
+.profil{
+	padding: 20px; 
+	border-radius: 10px; 
+	margin-top: 20px; 
+}
+
+.profil ul,
+.profil li{
+	list-style:none; 
+	margin: 0; 
+	padding: 0;
+}
+
+.profil_img{
+	width: 90%;
+	overflow:hidden;
+	
+}
+
+.profil_img img{
+	width: 100%;
+	max-width:200px;
+}
+
+
+
+.profil_adresse,
+.profil_infos{
+	border: 1px solid grey;
+	margin: 10px 0;
+	padding: 10px;
+}
+
+
+span.bulle{
+	color: white; 
+	text-align: center; 
+	width: 15px; 
+	height: 16px; 
+	border-radius: 15px; 
+	line-height: 15px; 
+	vertical-align: middle; 
+	background: red;
+	margin-left: 4px;
+	display: inline-block;
+	margin-right: 5px;
+	font-size: 10px;
+	font-family: arial;
+}
+
+
+/* Notation */
+.notation{
+	height: 20px;
+	margin-top: 15px
+}
+
+.notation a.star{
+	height: 15px; 
+	width: 15px; 
+	display: block;
+	float: left; 
+	margin: 0 2px;
+	background: url(../img/star.png) left top no-repeat;
+	background-size: 15px 15px;
+
+}
+
+.notation a.star:hover {
+	background: url(../img/star-2.png) left top no-repeat;
+	background-size: 15px 15px;
+}
+
