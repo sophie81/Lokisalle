@@ -111,9 +111,10 @@ form input[type='file']{
 	padding-top: 10px;
 	line-height: 20px;
 	padding-left: 5%;
-	width:65%;
 	height: 30px;
 	background-color: #FFF;
+	border: 0;
+	box-shadow: none;
 }
 
 form textarea{

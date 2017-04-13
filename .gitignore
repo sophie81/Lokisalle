@@ -1,2 +1,4 @@
 inc/init.inc.php
 .DS_Store
+.idea
+lokisalle.sql
