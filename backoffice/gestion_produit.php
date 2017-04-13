@@ -9,6 +9,11 @@ $resultat = $pdo -> query("SELECT * FROM produit");
 
 $produits = $resultat -> fetchAll(PDO::FETCH_ASSOC);
 
+$resultat = $pdo -> query("SELECT * FROM salle");
+$salles = $resultat -> fetchAll(PDO::FETCH_ASSOC);
+
+$salle ='';
+
 //debug($produits);
 
 require_once('../inc/header.inc.php');
@@ -55,9 +60,10 @@ require_once('../inc/header.inc.php');
 			</div>
 			<div class="col-md-6">
 				<label>Salle : </label><br/>
-				<select name="salle">
-					<option value=""></option>
-					<option value=""></option>
+				<select name="salles">
+					<?php foreach($salles as $valeur) : ?>
+						<option <?= ($salle == $valeur['id_salle']) ? 'selected' : '' ?> value="<?= $valeur['id_salle'] ?>"><?= $valeur['titre'] . " - " . $valeur['adresse'] . ", " . $valeur['cp'] . ", " . $valeur['ville'] . " - " . $valeur['capacite'] . "pers."?></option>
+					<?php endforeach; ?>
 				</select><br/><br/>
 				
 				<label>Tarif : </label><br/>
