@@ -59,19 +59,6 @@ if ($_POST) {
 		}
 	}
 
-	/*$verif_caractere = preg_match('#^[a-zA-Z0-9._-]+$#', $_POST['pseudo']); 
-
-			if(strlen($_POST[$field]) < 3 || strlen($_POST[$field]) > 25 ){
-				$msg .= '<div class="erreur">Veuillez renseigner un pseudo de 3 à 25 caractères</div>';
-			}
-			
-			if($verif_caractere){ // $verif_caractere == TRUE
-				
-			}
-			else{
-				$msg .= '<div class="erreur">Pseudo : Caractères acceptés : de A à Z, de 0 à 9, et les "-", "_", "."</div>';
-			}*/
-
 	if(empty($msg)){
 		if (isset($_GET['id'])) {
 			$resultat = $pdo -> prepare("UPDATE membre SET pseudo = :pseudo, nom = :nom, prenom = :prenom, email = :email, civilite = :civilite, statut = :statut WHERE id_membre = :id_membre");
