@@ -36,7 +36,7 @@ require_once('../inc/header.inc.php');
 					<?php endif; ?>
 				<?php endforeach; ?>
 				<td><a href="formulaire_produit.php?id=<?= $valeur['id_produit']; ?>"><img src="<?= RACINE_SITE . 'img/edit.png' ?>"></a></td>
-				<td><a href="supprimer_produit.php?id=<?= $valeur['id_produit']; ?>"><img src="<?= RACINE_SITE . 'img/delete.png' ?>"></a></td>
+				<td><a href="supprimer_salle.php?id=<?= $valeur['id_produit']; ?>"><img src="<?= RACINE_SITE . 'img/delete.png' ?>"></a></td>
 			</tr>
 		<?php endforeach; ?>
 	</table>

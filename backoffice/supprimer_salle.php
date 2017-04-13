@@ -24,6 +24,7 @@ if (isset($_GET['id']) && !empty($_GET['id']) && is_numeric($_GET['id'])) {
 		if ($resultat != FALSE) {
 			header('location:gestion_salle.php');
 		}
+
 		
 	} else {
 		header("location:gestion_salle.php");
