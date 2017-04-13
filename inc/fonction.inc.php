@@ -28,3 +28,16 @@ function userAdmin()
 		return false;
 	}
 }
+
+function checkLength($input)
+{
+	global $msg;
+
+	if(strlen($_POST[$input]) < 3 || strlen($_POST[$input]) > 25 ){
+		if ($input == 'mdp') {
+			$input = 'mot de passe';
+		}
+
+		$msg .= '<div class="erreur">Veuillez renseigner un '. $input . ' de 3 à 25 caractères</div>';
+	} 
+}
