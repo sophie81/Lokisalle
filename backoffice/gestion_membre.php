@@ -14,24 +14,31 @@ if ($_POST) {
 
 	$msg = '';
 
-	$required = array('pseudo', 'nom', 'prenom', 'email', 'civilite', 'statut');
+	$required = array('pseudo', 'nom', 'prenom', 'email', 'civilite');
 	$champ_vide = false;
 
 	foreach ($required as $field) {
 		if (empty($_POST[$field])) {
 			$champ_vide = true;
+			var_dump($field);
 		}
 	}
 
-	if (empty($_POST['mdp'])) {
-		$champ_vide = true;
-	} else {
-		checkLength('mdp');
-		$verif_caractere = preg_match('#^[a-zA-Z0-9._-]+$#', $_POST['mdp']); 
+	if (!isset($_GET['id'])) {
+		if (empty($_POST['mdp'])) {
+			$champ_vide = true;
+		} else {
+			checkLength('mdp');
+			$verif_caractere = preg_match('#^[a-zA-Z0-9._-]+$#', $_POST['mdp']); 
 
-		if(!$verif_caractere){ // $verif_caractere == TRUE
-			$msg .= '<div class="erreur">Mot de passe : Caractères acceptés : de A à Z, de 0 à 9, et les "-", "_", "."</div>';
+			if(!$verif_caractere){ // $verif_caractere == TRUE
+				$msg .= '<div class="erreur">Mot de passe : Caractères acceptés : de A à Z, de 0 à 9, et les "-", "_", "."</div>';
+			}
 		}
+	}
+	
+	if ($_POST['statut'] == null) {
+		$champ_vide = true;
 	}
 
 	if ($champ_vide) { 
@@ -58,19 +65,6 @@ if ($_POST) {
 		    $msg .= '<div class="erreur">Email non valide</div>';
 		}
 	}
-
-	/*$verif_caractere = preg_match('#^[a-zA-Z0-9._-]+$#', $_POST['pseudo']); 
-
-			if(strlen($_POST[$field]) < 3 || strlen($_POST[$field]) > 25 ){
-				$msg .= '<div class="erreur">Veuillez renseigner un pseudo de 3 à 25 caractères</div>';
-			}
-			
-			if($verif_caractere){ // $verif_caractere == TRUE
-				
-			}
-			else{
-				$msg .= '<div class="erreur">Pseudo : Caractères acceptés : de A à Z, de 0 à 9, et les "-", "_", "."</div>';
-			}*/
 
 	if(empty($msg)){
 		if (isset($_GET['id'])) {
@@ -117,8 +111,8 @@ if (isset($membre_actuel)) {
 	$statut = $membre_actuel['statut'];
 } elseif (!empty($msg)) {
 	$pseudo = $_POST['pseudo'];
-	$mdp = '';
 	$nom = $_POST['nom'];
+	$mdp = '';
 	$prenom = $_POST['prenom'];
 	$email = $_POST['email'];
 	$civilite = (isset($_POST['civilite'])) ? $_POST['civilite'] : '';
