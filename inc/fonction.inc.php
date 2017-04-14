@@ -55,7 +55,7 @@ function getMembre($id_membre){
 function getSalle($id_salle){
 	global $pdo;
 	
-	$recup_salle = $pdo -> query("SELECT id_salle, titre FROM salle WHERE id_salle = $id_salle");
+	$recup_salle = $pdo -> query("SELECT id_salle, titre, photo FROM salle WHERE id_salle = $id_salle");
 
 	$salle = $recup_salle -> fetch(PDO::FETCH_ASSOC);
 
