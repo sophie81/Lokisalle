@@ -47,7 +47,7 @@
 			                <div class="sidebar-nav navbar-collapse">
 			                    <ul class="nav" id="side-menu">
 			                        <li>
-			                            <a href="">Dashboard</a>
+			                            <a href="<?= RACINE_SITE ?>backoffice/dashboard.php">Dashboard</a>
 			                        </li>
 			                        <li>
 			                            <a href="<?= RACINE_SITE ?>backoffice/gestion_salle.php">Gestion des salles</span></a>
