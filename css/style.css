@@ -1,8 +1,10 @@
 /**************************************************** GENERAL ************************************************/
 *{ margin: 0; }
 body{  background-color: #f8f8f8; font-family : Raleway, sans-serif; font-size: 12px; }
-a{ text-decoration: none; color: #000; }
-h1{margin-top: 0;}
+a{ text-decoration: none; color: #337ab7;}
+a:hover { text-decoration: none; }
+.front h1{margin: 0; padding: 50px 0;}
+
 /**************************************************** HAUT ************************************************/
 header { text-align: center;}
 header  span{ color: #fff; font-weight: bold; text-transform: uppercase; margin-right: 5%; }
@@ -61,18 +63,10 @@ footer ul li p { margin-bottom: 0; }
 .cadre  p{ padding: 10px; }
 .centre{text-align: center;}
 /**************************************************** BOUTIQUE ************************************************/
-.boutique-gauche{ float: left; width: 30%; background: #f2f2f2; min-height: 500px; margin-right: 10%; padding-top: 10px; text-align: center; }
-.boutique-gauche  ul{ list-style: none; padding: 0; }
-.boutique-gauche  ul  li  a{ display: block; padding: 10px; }
-.boutique-gauche  ul  li  a:hover{ background: #04baf6; color: #fff; }
-.boutique-droite{float: left; width: 60%; }
-.boutique-produit{ float: left; width: 30%; text-align: center; padding: 5%; border-bottom: 1px solid #c0c0c0; }
-.boutique-produit:hover{ background: #c0c0c0; }
-/**************************************************** BOUTIQUE ************************************************/
-
-
-
-
+.thumbnail img { 
+	height: 150px;
+    width: 100%; 
+}
 
 /**************************************************** Formulaire ************************************************/
 form{
