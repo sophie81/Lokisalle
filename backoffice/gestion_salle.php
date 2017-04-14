@@ -49,7 +49,6 @@ if($_POST) {
 		if (!$verif_titre) {
 			$msg .= '<div class="erreur">Titre : Caractères acceptés : de A à Z, de 0 à 9, et les "-", "_", "."</div>';
 		}
-		var_dump($_POST['capacite']);
 		if(!is_numeric($_POST['capacite']) || strlen($_POST['capacite']) > 3) {
 			$msg .= '<div class="erreur">La capacité doit être comprise entre 1 et 999</div>';
 		}
