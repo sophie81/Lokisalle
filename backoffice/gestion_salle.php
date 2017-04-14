@@ -44,7 +44,6 @@ if($_POST) {
 		$msg .= '<div class="erreur">Veuillez renseigner tout les champs !</div>';
 	} else {
 		checkLength('titre');
-
 		$verif_titre = preg_match('#^[a-zA-Z0-9._-]+$#', $_POST['titre']);
 
 		if (!$verif_titre) {

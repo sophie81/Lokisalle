@@ -6,7 +6,6 @@ if (!userAdmin()) {
 }
 
 $recup_commande = $pdo -> query('SELECT c.id_commande, c.id_membre, c.id_produit, p.prix, DATE_FORMAT(c.date_enregistrement, "%d/%m/%Y %H:%m") as date_enregistrement  FROM produit p, commande c WHERE c.id_produit = p.id_produit');
-
 $commande = $recup_commande -> fetchAll(PDO::FETCH_ASSOC);
 
 require_once('../inc/header.inc.php');
@@ -28,18 +27,19 @@ require_once('../inc/header.inc.php');
 		<?php foreach ($commande as $indice => $valeur): ?>
 			<tr>
 				<?php foreach($valeur as $indice2 => $valeur2): ?>
-					<?php if ($indice2 == 'statut'): ?>
-						<?php if($valeur2 == 0): ?>
-							<td>Membre</td>
-						<?php else: ?>
-							<td>Admin</td>
-						<?php endif; ?>
+					<?php if ($indice2 == 'id_membre'): ?>
+						<?php $membre_val = getMembre($valeur2); ?>
+						<td><?= $membre_val['id_membre']; ?> - <?= $membre_val['email']; ?></td>
+					<?php elseif ($indice2 == 'id_produit'): ?>
+						<?php $produit_val = getProduit($valeur2); $salle_val = getSalle($produit_val['id_salle']) ?>
+						<td><?= $produit_val['id_salle']; ?> - <?= $salle_val['titre']; ?><br><?= $produit_val['date_arrivee']; ?> au <?= $produit_val['date_depart']; ?></td>
+					<?php elseif ($indice2 == 'prix'): ?>
+						<td><?= $valeur2 ?> €</td>
 					<?php else: ?>
 						<td><?= $valeur2 ?></td>
 					<?php endif; ?>
 				<?php endforeach; ?>
 				<td><a href="gestion_avis.php?id=<?= $valeur['id_membre']; ?>"><i class="fa fa-search" aria-hidden="true"></i></a></td>
-				<td><a href="gestion_avis.php?id=<?= $valeur['id_membre']; ?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
 				<td><a href="supprimer_avis.php?id=<?= $valeur['id_membre']; ?>"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
 			</tr>
 		<?php endforeach; ?>
