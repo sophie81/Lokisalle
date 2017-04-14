@@ -97,20 +97,21 @@ require_once('../inc/header.inc.php');
 		<div class="col-md-12">
 			<ul class="list-group">
 				<li class="list-group-item"><b>ID avis :</b> <span><?= $id_avis; ?></span></li>
-				<li class="list-group-item"><b>ID membre :</b> 
+				<li class="list-group-item"> 
 					<?php foreach($avis_actuel as $indice_avis => $valeur_avis): ?>
 						<?php if($indice_avis == 'id_membre'): ?>
 							<?php $avis_salle = getMembre($id_membre); ?>
-							<span><?= $membre_val['id_membre']; ?> - <?= $membre_val['email']; ?></span>
+							<span><b>ID membre&nbsp;:&nbsp;</b> <?= $membre_val['id_membre']; ?></span> <br>
+							<span><b>Email membre&nbsp;:&nbsp;</b> <?= $membre_val['email']; ?></span>
 						<?php endif; ?>
 					<?php endforeach; ?>
 				</li>
 				<li class="list-group-item">
-					<b>ID salle&nbsp;:</b>
 					<?php foreach($avis_actuel as $indice_avis => $valeur_avis): ?>
 						<?php if($indice_avis == 'id_salle'): ?>
 							<?php $avis_salle = getSalle($id_salle); ?>
-							<span><?= $avis_salle['id_salle']; ?> - <?=  $avis_salle['titre']; ?></span>
+							<span><b>ID salle&nbsp;:&nbsp;</b> <?= $avis_salle['id_salle']; ?> <br>
+							<b>Titre de la salle&nbsp;:&nbsp;</b> <?= $avis_salle['titre']; ?></span> <br>
 						<?php endif; ?>
 					<?php endforeach; ?>
 				</li>
@@ -134,6 +135,10 @@ require_once('../inc/header.inc.php');
 		<textarea name="commentaire" cols="30" rows="10"><?= $commentaire; ?></textarea><br></br>
 		<input type="submit" class="btn btn-primary" value="Enregistrer">
 	</form>
+	<div class="col-xs-12">
+		<a href="<?= RACINE_SITE ?>backoffice/gestion_avis.php" class="btn btn-danger">Retour</a>
+	</div>
+	
 <?php endif; ?>
 
 <?php require_once('../inc/footer.inc.php'); ?>
