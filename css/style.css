@@ -45,6 +45,7 @@ header  nav  a:hover, a.active{ background: #04baf6; }
 }
 
 .bo .fa { font-size: 25px; }
+.fa.fa-star { font-size: 15px; }
 
 /**************************************************** BAS ************************************************/
 footer{ background: #000; color: white; text-align: center; padding: 7px 0;}
