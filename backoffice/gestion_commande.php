@@ -22,6 +22,10 @@ $id_commande = (isset($commande_actuel)) ? $commande_actuel['id_commande'] : '';
 $prix = (isset($commande_actuel)) ? $commande_actuel['prix'] : '';
 $date_enregistrement = (isset($commande_actuel)) ? $commande_actuel['date_enregistrement'] : '';
 
+date_default_timezone_set('Europe/Paris');
+$date_actuelle = strtotime(str_replace('/', '-', date('d/m/Y')));
+
+
 require_once('../inc/header.inc.php');
 
 ?>
@@ -54,7 +58,10 @@ require_once('../inc/header.inc.php');
 					<?php endif; ?>
 				<?php endforeach; ?>
 				<td><a href="gestion_commande.php?id=<?= $valeur['id_commande']; ?>"><i class="fa fa-search" aria-hidden="true"></i></a></td>
-				<td><a href="supprimer_commande.php?id=<?= $valeur['id_commande']; ?>"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
+				<?php $produit = getProduit($valeur['id_produit']); ?>
+				<?php if(strtotime(str_replace('/', '-', $produit['date_arrivee'])) > $date_actuelle): ?>
+					<td><a href="supprimer_commande.php?id=<?= $valeur['id_commande']; ?>"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
+				<?php endif; ?>
 			</tr>
 		<?php endforeach; ?>
 		
