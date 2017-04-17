@@ -23,7 +23,7 @@
 		            <ul class="nav navbar-top-links navbar-right">
 						<li class="dropdown">
 		                    <div class="dropdown-toggle" data-toggle="dropdown" href="#">
-		                        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+		                        <i class="fa fa-user fa-fw"></i>Espace Membre <i class="fa fa-caret-down"></i>
 		                    </div>
 		                    <ul class="dropdown-menu dropdown-user">
 		                        <?php if(userConnecte()) : ?>
@@ -71,6 +71,6 @@
 		        </nav>
         </header>
         <section>
-			<div id="page-wrapper"  class="<?php if (userConnecte()): ?> bo <?php else: ?> front <?php endif; ?>"  > 
+			<div id="page-wrapper"  class="<?php if (userConnecte()): ?>bo<?php else: ?>front<?php endif; ?>"  > 
 
 				
