@@ -12,11 +12,16 @@ if (isset($_GET['id']) && !empty($_GET['id']) && is_numeric($_GET['id'])) {
 
 	if ($resultat -> rowCount() > 0) {
 		$membre = $resultat -> fetch(PDO::FETCH_ASSOC);
+		$commande = haveCommandeByMembre($valeur['id_membre']);
 
-		$resultat = $pdo -> exec("DELETE FROM membre WHERE id_membre = $membre[id_membre]");
+		if(!$commande) {
+			$resultat = $pdo->exec("DELETE FROM membre WHERE id_membre = $membre[id_membre]");
 
-		if ($resultat != FALSE) {
-			header('location:gestion_membre.php');
+			if ($resultat != FALSE) {
+				header('location:gestion_membre.php');
+			}
+		} else {
+			header("location:gestion_membre.php");
 		}
 		
 	} else {

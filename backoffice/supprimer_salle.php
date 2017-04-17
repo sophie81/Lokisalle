@@ -12,16 +12,20 @@ if (isset($_GET['id']) && !empty($_GET['id']) && is_numeric($_GET['id'])) {
 
 	if ($resultat -> rowCount() > 0) {
 		$salle = $resultat -> fetch(PDO::FETCH_ASSOC);
+		$commande = haveCommande($valeur['id_salle']);
+		if(!$commande) {
+			$chemin_photo_a_supprimer = RACINE_SERVEUR . RACINE_SITE . 'photo/' . $salle['photo'];
 
-		$chemin_photo_a_supprimer = RACINE_SERVEUR . RACINE_SITE . 'photo/' . $salle['photo'];
+			if ($salle['photo'] != 'default.jpg' && file_exists($chemin_photo_a_supprimer)) {
+				unlink($chemin_photo_a_supprimer);
+			}
 
-		if ($salle['photo'] != 'default.jpg' && file_exists($chemin_photo_a_supprimer)) {
-			unlink($chemin_photo_a_supprimer);
-		}
+			$resultat = $pdo->exec("DELETE FROM salle WHERE id_salle = $salle[id_salle]");
 
-		$resultat = $pdo -> exec("DELETE FROM salle WHERE id_salle = $salle[id_salle]");
-
-		if ($resultat != FALSE) {
+			if ($resultat != FALSE) {
+				header('location:gestion_salle.php');
+			}
+		}else {
 			header('location:gestion_salle.php');
 		}
 
