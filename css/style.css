@@ -37,14 +37,6 @@ header  nav  a:hover, a.active{ background: #04baf6; }
 }
 
 #page-wrapper.front { padding: 0; margin: 0; }
-@media (min-width: 768px) {
-  #page-wrapper {
-    position: inherit;
-    margin: 0 0 0 250px;
-    padding: 0 30px;
-    border-left: 1px solid #e7e7e7;
-  }
-}
 
 .bo .fa { font-size: 25px; }
 .fa.fa-star { font-size: 15px; }
