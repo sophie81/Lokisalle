@@ -83,7 +83,14 @@ require_once('../inc/header.inc.php');
 				<?php endforeach; ?>
 				<td><a href="gestion_avis.php?id=<?= $valeur['id_avis']; ?>&action=details"><i class="fa fa-search" aria-hidden="true"></i></a></td>
 				<td><a href="gestion_avis.php?id=<?= $valeur['id_avis']; ?>&action=modif"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
-				<td><a href="supprimer_avis.php?id=<?= $valeur['id_avis']; ?>"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
+				<td><a href="#" onClick="ConfirmSuppr(<?= $valeur['id_avis']; ?>)"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
+				<script type="text/javascript">
+					function ConfirmSuppr(avis) {
+						if (confirm("Voulez-vous supprimer cet avis ?")) { // Clic sur OK
+							document.location.href="supprimer_avis.php?id="+avis;
+						}
+					}
+				</script>
 			</tr>
 		<?php endforeach; ?>
 	</table>

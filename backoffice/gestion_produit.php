@@ -32,12 +32,18 @@ if($_POST) {
 		if(!is_numeric($_POST['prix'])) {
 			$msg .= '<div class="erreur">Le prix n\'est pas correct, veuillez entrer un nombre entier.</div>';
 		}
-		/*$format ="Y-m-d H:i";
-		if(DateTime::createFromFormat($format,$_POST['date_arrivee']) === false || DateTime::createFromFormat($format,$_POST['date_depart']) === false){
+		$format ="Y-m-d H:i";
+		$date_arrivee = DateTime::createFromFormat('d/m/Y H:i', $_POST['date_arrivee']);
+		$date_depart = DateTime::createFromFormat('d/m/Y H:i', $_POST['date_depart']);
+		if($date_arrivee === false || $date_depart === false){
 			$msg .= '<div class="erreur">Le format de la date doit être jj/mm/aaaa hh:mm</div>';
 		} elseif(strtotime(str_replace('/', '-', $_POST['date_arrivee'])) > strtotime(str_replace('/', '-', $_POST['date_depart']))){
 			$msg .= '<div class="erreur">La date d\'arrivé doit être inférieure à la date de départ.</div>';
-		}*/
+		} else {
+			$date_arrivee = strtotime(str_replace('/', '-', $_POST['date_arrivee']));
+			$date_depart = strtotime(str_replace('/', '-', $_POST['date_depart']));
+		}
+
 	}
 
 	if (empty($msg)) {
@@ -49,8 +55,8 @@ if($_POST) {
 		}
 
 		$resultat->bindParam(':id_salle', $_POST['id_salle'], PDO::PARAM_INT);
-		$resultat->bindParam(':date_arrivee', $_POST['date_arrivee'], PDO::PARAM_STR);
-		$resultat->bindParam(':date_depart', $_POST['date_depart'], PDO::PARAM_STR);
+		$resultat->bindParam(':date_arrivee', $date_arrivee, PDO::PARAM_STR);
+		$resultat->bindParam(':date_depart', $date_depart, PDO::PARAM_STR);
 		$resultat->bindParam(':prix', $_POST['prix'], PDO::PARAM_INT);
 
 		if ($resultat->execute()) {
@@ -125,12 +131,12 @@ require_once('../inc/header.inc.php');
 				<?php endforeach; ?>
 				<td><a href="gestion_produit.php?id=<?= $valeur['id_produit']; ?>&action=details"><i class="fa fa-search" aria-hidden="true"></i></a></td>
 				<td><a href="gestion_produit.php?id=<?= $valeur['id_produit']; ?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
-				<td><a href="#" onClick="<?php if($valeur['etat'] == "reservation"): ?>InfoMessage()<?php else: ?>ConfirmSuppr()<?php endif; ?>" ><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
+				<td><a href="#" onClick="<?php if($valeur['etat'] == "reservation"): ?>InfoMessage()<?php else: ?>ConfirmSuppr(<?= $valeur['id_produit']; ?>)<?php endif; ?>" ><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
 			</tr>
 			<script type="text/javascript">
-				function ConfirmSuppr() {
+				function ConfirmSuppr(produit) {
 					if (confirm("Voulez-vous supprimer ce produit ?")) { // Clic sur OK
-						document.location.href="supprimer_poduit.php?id=<?= $valeur['id_produit']; ?>";
+						document.location.href="supprimer_produit.php?id="+produit;
 					}
 				}
 
@@ -148,10 +154,10 @@ require_once('../inc/header.inc.php');
 		<form action="" method="post">
 			<div class="col-md-6">
 				<label>Date d'arrivée : </label><br/>
-				<input type="datetime-local" name="date_arrivee" value="<?= $date_arrivee ?>" <?= $disabled; ?>/><br/><br/>
+				<input type="text" name="date_arrivee" placeholder="jj/mm/aaaa hh:mm" value="<?= $date_arrivee ?>" <?= $disabled; ?>/><br/><br/>
 
 				<label>Date de départ : </label><br/>
-				<input type="datetime-local" name="date_depart" value="<?= $date_depart ?>" <?= $disabled; ?>/><br/><br/>
+				<input type="text" name="date_depart" placeholder="jj/mm/aaaa hh:mm" value="<?= $date_depart ?>" <?= $disabled; ?>/><br/><br/>
 			</div>
 			<div class="col-md-6">
 				<label>Salle : </label><br/>

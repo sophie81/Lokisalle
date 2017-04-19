@@ -56,12 +56,12 @@ require_once('../inc/header.inc.php');
 				<?php endforeach; ?>
 				<td><a href="gestion_commande.php?id=<?= $valeur['id_commande']; ?>"><i class="fa fa-search" aria-hidden="true"></i></a></td>
 				<?php $produit = getProduit($valeur['id_produit']); ?>
-					<td><a href="#" onClick="<?php if(strtotime(str_replace('/', '-', $produit['date_arrivee'])) < $date_actuelle): ?>InfoMessage()<?php else: ?>ConfirmSuppr()<?php endif; ?>" ><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+					<td><a href="#" onClick="<?php if(strtotime(str_replace('/', '-', $produit['date_arrivee'])) < $date_actuelle): ?>InfoMessage()<?php else: ?>ConfirmSuppr(<?= $valeur['id_commande']; ?>)<?php endif; ?>" ><i class="fa fa-trash-o" aria-hidden="true"></i></a>
 					</td>
 				<script type="text/javascript">
-					function ConfirmSuppr() {
+					function ConfirmSuppr(commande) {
 						if (confirm("Voulez-vous supprimer cette commande ?")) { // Clic sur OK
-							document.location.href="supprimer_commande.php?id=<?= $valeur['id_commande']; ?>";
+							document.location.href="supprimer_commande.php?id="+commande;
 						}
 					}
 
