@@ -45,7 +45,7 @@ function checkLength($input)
 function getMembre($id_membre){
 	global $pdo;
 
-	$recup_membre = $pdo -> query("SELECT id_membre, email FROM membre WHERE id_membre = $id_membre");
+	$recup_membre = $pdo -> query("SELECT id_membre, email, pseudo FROM membre WHERE id_membre = $id_membre");
 
 	$membre = $recup_membre -> fetch(PDO::FETCH_ASSOC);
 
@@ -55,7 +55,7 @@ function getMembre($id_membre){
 function getSalle($id_salle){
 	global $pdo;
 	
-	$recup_salle = $pdo -> query("SELECT id_salle, titre, photo FROM salle WHERE id_salle = $id_salle");
+	$recup_salle = $pdo -> query("SELECT * FROM salle WHERE id_salle = $id_salle");
 
 	$salle = $recup_salle -> fetch(PDO::FETCH_ASSOC);
 

@@ -62,7 +62,7 @@ require_once('inc/header.inc.php');
 		                            <img src="<?= RACINE_SITE . 'photo/' . $salle['photo']; ?>">
 		                            <div class="caption">
 		                                <h4 class="pull-right"><?= $valeur['prix']; ?> €</h4>
-		                                <h4><a href="fiche_produit.php?id=<?= $valeur['id_salle'];?>"><?= $salle['titre']; ?></a>
+		                                <h4><a href="fiche_produit.php?id=<?= $valeur['id_produit'];?>"><?= $salle['titre']; ?></a>
 		                                </h4>
 		                     
 		                                <p><?= substr($salle['description'], 0, 40); ?><?php if($description > 40): ?>...<?php endif; ?></p>
@@ -70,7 +70,7 @@ require_once('inc/header.inc.php');
 		                                <p><i class="fa fa-calendar" aria-hidden="true"></i> <?= $valeur['date_arrivee']; ?> au <?= $valeur['date_depart']; ?></p>
 		                            </div>
 		                            <div class="ratings">
-		                                <p class="pull-right"><a href="fiche_produit.php?id=<?= $valeur['id_salle']; ?>"><i class="fa fa-search" aria-hidden="true"></i> Voir</a></p>
+		                                <p class="pull-right"><a href="fiche_produit.php?id=<?= $valeur['id_produit']; ?>"><i class="fa fa-search" aria-hidden="true"></i> Voir</a></p>
 		                                <p >Note</p>
 		                            </div>
 		                        </div>
