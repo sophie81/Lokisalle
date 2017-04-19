@@ -1,6 +1,6 @@
 /**************************************************** GENERAL ************************************************/
 *{ margin: 0; }
-body{  background-color: #f8f8f8; font-family : Raleway, sans-serif; font-size: 12px; }
+body{  background-color: #FFF; font-family : Raleway, sans-serif; font-size: 12px; }
 a{ text-decoration: none; color: #337ab7;}
 a:hover { text-decoration: none; }
 .front h1{margin: 0; padding: 50px 0;}
@@ -42,7 +42,7 @@ header  nav  a:hover, a.active{ background: #04baf6; }
 .fa.fa-star { font-size: 15px; }
 
 /**************************************************** BAS ************************************************/
-footer{ color: #000; text-align: center; padding: 7px 0;}
+footer{ background-color: #f8f8f8; color: #000; text-align: center; padding: 7px 0;}
 footer ul { list-style: none; margin: 0; padding: 0; }
 footer ul li { display: inline-block; }
 footer ul li a { color: #000; }
