@@ -72,6 +72,6 @@
 		        </nav>
         </header>
         <section>
-			<div id="page-wrapper"  class="<?php if (userConnecte()): ?>bo<?php else: ?>front<?php endif; ?>"  > 
+			<div id="page-wrapper"  class="<?php if (userAdmin()): ?>bo<?php else: ?>front<?php endif; ?>"  > 
 
 				
