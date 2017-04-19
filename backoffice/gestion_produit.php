@@ -26,6 +26,8 @@ if($_POST) {
 		}
 	}
 
+	$date_arrivee = DateTime::createFromFormat('d/m/Y H:i', $_POST['date_arrivee']);
+	$date_depart = DateTime::createFromFormat('d/m/Y H:i', $_POST['date_depart']);
 	if ($champ_vide) {
 		$msg .= '<div class="erreur">Veuillez renseigner tout les champs !</div>';
 	} else {
@@ -33,15 +35,13 @@ if($_POST) {
 			$msg .= '<div class="erreur">Le prix n\'est pas correct, veuillez entrer un nombre entier.</div>';
 		}
 		$format ="Y-m-d H:i";
-		$date_arrivee = DateTime::createFromFormat('d/m/Y H:i', $_POST['date_arrivee']);
-		$date_depart = DateTime::createFromFormat('d/m/Y H:i', $_POST['date_depart']);
 		if($date_arrivee === false || $date_depart === false){
 			$msg .= '<div class="erreur">Le format de la date doit être jj/mm/aaaa hh:mm</div>';
 		} elseif(strtotime(str_replace('/', '-', $_POST['date_arrivee'])) > strtotime(str_replace('/', '-', $_POST['date_depart']))){
 			$msg .= '<div class="erreur">La date d\'arrivé doit être inférieure à la date de départ.</div>';
 		} else {
-			$date_arrivee = strtotime(str_replace('/', '-', $_POST['date_arrivee']));
-			$date_depart = strtotime(str_replace('/', '-', $_POST['date_depart']));
+			$date_arrivee = $date_arrivee->format($format);
+			$date_depart = $date_depart->format($format);
 		}
 
 	}

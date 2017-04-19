@@ -257,3 +257,7 @@ span.bulle{
 	font-size: 10px;
 	font-family: arial;
 }
+
+.mb-1 {
+	margin-bottom: 25px;
+}
