@@ -24,7 +24,6 @@ $resultatAvis = $pdo -> query("SELECT id_avis, id_membre, id_salle, commentaire,
 $avis = $resultatAvis -> fetchAll(PDO::FETCH_ASSOC);
 
 $salle = getSalle($produit['id_salle']);
-$date_actuelle = strtotime(str_replace('/', '-', date('d/m/Y')));
 
 //$resultat = $pdo -> query("SELECT * FROM produit WHERE categorie != '$categorie' ORDER BY prix DESC LIMIT 0,5");
 $resultats = $pdo -> query("SELECT * FROM produit WHERE id_produit != $id_produit");

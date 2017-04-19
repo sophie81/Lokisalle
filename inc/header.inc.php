@@ -11,7 +11,29 @@
 				<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
 		            <div class="navbar-header">
 		                <a class="navbar-brand" href="<?= RACINE_SITE ?>index.php"">Lokisalle</a>
-		                <?php if(!userConnecte()) : ?>
+		                <?php if(userAdmin()) : ?>
+		                	
+		                	<ul class="nav navbar-top-links navbar-left">
+		                        <li>
+		                            <a href="<?= RACINE_SITE ?>backoffice/dashboard.php">Dashboard</a>
+		                        </li>
+		                        <li>
+		                            <a href="<?= RACINE_SITE ?>backoffice/gestion_salle.php">Gestion des salles</span></a>
+		                        </li>
+		                        <li>
+		                            <a href="<?= RACINE_SITE ?>backoffice/gestion_produit.php">Gestion des produits</a>
+		                        </li>
+		                        <li>
+		                            <a href="<?= RACINE_SITE ?>backoffice/gestion_membre.php">Gestions des membres</a>
+		                        </li>
+		                        <li>
+		                            <a href="<?= RACINE_SITE ?>backoffice/gestion_avis.php">Gestions des avis</span></a>
+		                        </li>
+		                        <li>
+		                            <a href="<?= RACINE_SITE ?>backoffice/gestion_commande.php">Gestion des commandes</span></a>
+		                        </li>
+		                    </ul>
+		                <?php elseif(!userConnecte()): ?>
 		                	<ul class="nav navbar-top-links navbar-left">
 		                		<li><a href="">Qui sommes nous</a></li>
 			                	<li><a href="<?= RACINE_SITE ?>contact.php">Contact</a></li>
@@ -29,7 +51,9 @@
 		                        <?php if(userConnecte()) : ?>
 									<li><a href="<?= RACINE_SITE ?>profil.php"><i class="fa fa-user fa-fw"></i> Profil</a></li>
 									<?php if(!userAdmin()) : ?>
-										<li><a href="<?= RACINE_SITE ?>index.php""><i class="fa fa-list" aria-hidden="true"></i> Accueil</a></li>
+										<li class="divider"></li>
+										<li><a href="<?= RACINE_SITE ?>index.php""><i class="fa fa-home" aria-hidden="true"></i> Accueil</a></li>
+										<li class="divider"></li>
 										<li><a href="historique_commandes.php"><i class="fa fa-list" aria-hidden="true"></i> Historique des commandes</a></li>
 									<?php endif; ?>
 									<li class="divider"></li>
@@ -42,36 +66,9 @@
 		                    <!-- /.dropdown-user -->
 		                </li>
 		            </ul>
-		            <!-- /.navbar-top-links -->
-					<?php if (userAdmin()): ?>
-			            <div class="navbar-default sidebar" role="navigation" style="display: block;">
-			                <div class="sidebar-nav navbar-collapse">
-			                    <ul class="nav" id="side-menu">
-			                        <li>
-			                            <a href="<?= RACINE_SITE ?>backoffice/dashboard.php">Dashboard</a>
-			                        </li>
-			                        <li>
-			                            <a href="<?= RACINE_SITE ?>backoffice/gestion_salle.php">Gestion des salles</span></a>
-			                        </li>
-			                        <li>
-			                            <a href="<?= RACINE_SITE ?>backoffice/gestion_produit.php">Gestion des produits</a>
-			                        </li>
-			                        <li>
-			                            <a href="<?= RACINE_SITE ?>backoffice/gestion_membre.php">Gestions des membres</a>
-			                        </li>
-			                        <li>
-			                            <a href="<?= RACINE_SITE ?>backoffice/gestion_avis.php">Gestions des avis</span></a>
-			                        </li>
-			                        <li>
-			                            <a href="<?= RACINE_SITE ?>backoffice/gestion_commande.php">Gestion des commandes</span></a>
-			                        </li>
-			                    </ul>
-			                </div>
-			            <?php endif ?>
-		            </div>
 		        </nav>
         </header>
         <section>
-			<div id="page-wrapper"  class="<?php if (userAdmin()): ?>bo<?php else: ?>front<?php endif; ?>"  > 
+			<div id="page-wrapper"  class="<?php if (userAdmin()): ?>bo<?php else: ?>front<?php endif; ?> container"  > 
 
 				
