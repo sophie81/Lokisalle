@@ -29,6 +29,7 @@
 		                        <?php if(userConnecte()) : ?>
 									<li><a href="<?= RACINE_SITE ?>profil.php"><i class="fa fa-user fa-fw"></i> Profil</a></li>
 									<?php if(!userAdmin()) : ?>
+										<li><a href="<?= RACINE_SITE ?>index.php""><i class="fa fa-list" aria-hidden="true"></i> Accueil</a></li>
 										<li><a href="historique_commandes.php"><i class="fa fa-list" aria-hidden="true"></i> Historique des commandes</a></li>
 									<?php endif; ?>
 									<li class="divider"></li>

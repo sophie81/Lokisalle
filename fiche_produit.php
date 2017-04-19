@@ -16,6 +16,12 @@ if (isset($_GET['id']) && !empty($_GET['id']) && is_numeric($_GET['id'])) {
 } else {
 	header('location:index.php');
 }
+if (userConnecte()) {
+	extract($_SESSION['membre']);
+}
+
+$resultatAvis = $pdo -> query("SELECT id_avis, id_membre, id_salle, commentaire, note, DATE_FORMAT(date_enregistrement, '%d/%m/%Y') as date_enregistrement FROM avis WHERE id_salle = $id_salle");
+$avis = $resultatAvis -> fetchAll(PDO::FETCH_ASSOC);
 
 $salle = getSalle($produit['id_salle']);
 $date_actuelle = strtotime(str_replace('/', '-', date('d/m/Y')));
@@ -23,6 +29,8 @@ $date_actuelle = strtotime(str_replace('/', '-', date('d/m/Y')));
 //$resultat = $pdo -> query("SELECT * FROM produit WHERE categorie != '$categorie' ORDER BY prix DESC LIMIT 0,5");
 $resultats = $pdo -> query("SELECT * FROM produit WHERE id_produit != $id_produit");
 $suggestions = $resultats -> fetchAll(PDO::FETCH_ASSOC);
+
+$commentaire = (isset($_POST['commentaire'])) ? $_POST['commentaire'] : '';
 
 require_once('inc/header.inc.php');
 
@@ -35,7 +43,17 @@ require_once('inc/header.inc.php');
             	<?= $salle['titre']; ?>
                 <small>Item Subheading</small>
             </h1>
-            <a href="">Réserver</a>
+            <?php if(userConnecte()) : ?>
+		       	<form action="reservation.php" method="post">
+					<input type="hidden"  name="id_membre" value="<?= $id_membre ?>"/>
+					
+					<input type="hidden"  name="id_produit" value="<?= $id_produit ?>"/>
+					
+					<input type="submit" value="Réserver" class="btn btn-success" />	
+		       	</form>
+		    <?php else: ?>
+		    	<p style="font-size: 18px;"><a href="connexion.php">Connectez-vous</a> ou <a href="inscription.php">Inscrivez-vous</a> pour réserver cette salle.</p>
+			<?php endif; ?>
         </div>
     </div>
 
@@ -115,22 +133,53 @@ require_once('inc/header.inc.php');
         <div class="col-lg-12">
             <h3 class="page-header">Commentaire</h3>
         </div>
+        <div class="col-lg-12">
+        	<ul class="list-group">
+        		<?php foreach($avis as $avis_val) : ?>
+        			<?php $membre = getMembre($avis_val['id_membre']); ?>
+			        <li class="list-group-item">
+			        	<p><i class="fa fa-user fa-fw"></i><b><?= $membre['pseudo']; ?></b></p>
+			        	<p style="font-size: 15px;">
+							<?php for($i=0; $i < $avis_val['note']; $i++):?>
+								<i class="fa fa-star" aria-hidden="true" style="color: #FFD700;"></i>
+							<?php endfor; ?> |
+							<?= $avis_val['commentaire']; ?>
+			        	</p>
+			        	<p><i><?= $avis_val['date_enregistrement']; ?></i></p>
+			        </li>
+				<?php endforeach; ?>
+        	</ul>
+        </div>
         <?php if(userConnecte()) : ?>
-	       	<form action="" method="post">
-	       		<input type="text" name="pseudo" value="<?= $pseudo ?>" placeholder="Pseudo" /><br/><br/>
-			
-				<input type="text" name="nom" value="<?= $nom ?>" placeholder="Nom" /><br/><br/>
+        	<?= $msg; ?>
+	       	<form action="comment.php" method="post">
+				<input type="hidden"  name="id_membre" value="<?= $id_membre ?>"/>
 				
-				<input type="text" name="prenom" value="<?= $prenom ?>" placeholder="Prénom" /><br/><br/>
+				<input type="hidden"  name="id_salle" value="<?= $id_salle ?>"/>
+
+				<p>Note&nbsp;:&nbsp;</p>
+				<div class="acidjs-rating-stars">
+					<input type="radio" value="5" name="radio[]" id="radio-1" /><label for="radio-1"></label>
+					<input type="radio" value="4" name="radio[]" id="radio-2" /><label for="radio-2"></label>
+					<input type="radio" value="3" name="radio[]" id="radio-3" /><label for="radio-3"></label>
+					<input type="radio" value="2" name="radio[]" id="radio-4" /><label for="radio-4"></label>
+					<input type="radio" value="1" name="radio[]" id="radio-5" /><label for="radio-5"></label>
+				</div>	
 			
-				<textarea name="commentaire" cols="30" rows="10"><?= $commentaire; ?></textarea><br></br>
+				<textarea name="commentaire" cols="30" rows="10" placeholder="Votre commentaire"><?= $commentaire; ?></textarea><br></br>
 				
 				<input type="submit" value="Envoyer" class="btn btn-primary" />	
 	       	</form>
 	    <?php else: ?>
-	    	<p>Connectez-vous pour laisser un commentaire et une note.</p>
+	    	<div class="col-lg-12">
+	    		<p style="font-size: 18px;"><a href="connexion.php">Connectez-vous</a> pour laisser un commentaire et une note.</p>
+	    	</div>
 		<?php endif; ?>
     </div>
+    <div class="row">
+    	<div class="col-lg-12 text-center">
+    		<a href="index.php">Retour vers le catalogue.</a>
+    	</div>
+    </div>
 </div>
-
  <?php require_once('inc/footer.inc.php'); ?>

@@ -68,6 +68,65 @@ footer ul li p { margin-bottom: 0; }
     width: 100%; 
 }
 
+.acidjs-rating-stars,
+.acidjs-rating-stars label::before
+{
+    display: inline-block;
+}
+ 
+.acidjs-rating-stars label:hover,
+.acidjs-rating-stars label:hover ~ label
+{
+    color: #f5b301;
+}
+ 
+.acidjs-rating-stars *
+{
+    margin: 0;
+    padding: 0;
+}
+ 
+.acidjs-rating-stars input
+{
+    display: none;
+}
+ 
+.acidjs-rating-stars
+{
+    unicode-bidi: bidi-override;
+    direction: rtl;
+}
+ 
+.acidjs-rating-stars label
+{
+    color: #ccc;
+    float: right;
+}
+ 
+.acidjs-rating-stars label::before
+{
+    content: "\2605";
+    width: 18px;
+    line-height: 18px;
+    text-align: center;
+    font-size: 18px;
+    cursor: pointer;
+}
+ 
+.acidjs-rating-stars input:checked ~ label
+{
+    color: #f5b301;
+}
+ 
+.acidjs-rating-disabled
+{
+    opacity: .50;
+     
+    -webkit-pointer-events: none;
+    -moz-pointer-events: none;
+    pointer-events: none;
+}
+
 /**************************************************** Formulaire ************************************************/
 form{
 	padding: 20px;
@@ -198,27 +257,3 @@ span.bulle{
 	font-size: 10px;
 	font-family: arial;
 }
-
-
-/* Notation */
-.notation{
-	height: 20px;
-	margin-top: 15px
-}
-
-.notation a.star{
-	height: 15px; 
-	width: 15px; 
-	display: block;
-	float: left; 
-	margin: 0 2px;
-	background: url(../img/star.png) left top no-repeat;
-	background-size: 15px 15px;
-
-}
-
-.notation a.star:hover {
-	background: url(../img/star-2.png) left top no-repeat;
-	background-size: 15px 15px;
-}
-
