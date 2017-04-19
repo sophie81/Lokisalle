@@ -1,7 +1,22 @@
 <?php
 require_once('inc/init.inc.php');
 
-$recup_produit = $pdo -> query('SELECT id_produit, id_salle, DATE_FORMAT(date_arrivee, "%d/%m/%Y") as date_arrivee, DATE_FORMAT(date_depart, "%d/%m/%Y") as date_depart, prix, etat FROM produit');
+/**** PAGINATION ****/
+$resultat_page = $pdo -> query('SELECT COUNT(id_produit) as nbProduit FROM produit WHERE etat = "libre" AND date_arrivee > CURRENT_DATE');
+$data = $resultat_page -> fetch(PDO::FETCH_ASSOC);
+$nbProduit = $data['nbProduit'];
+$perPage = 9;
+$nbPage = ceil($nbProduit/$perPage);
+
+if (isset($_GET['p']) && $_GET['p'] > 0 && $_GET['p'] <= $nbProduit) {
+	$cPage = $_GET['p'];
+} else {
+	$cPage = 1;
+}
+
+/**** /PAGINATION ****/
+
+$recup_produit = $pdo -> query("SELECT id_produit, id_salle, DATE_FORMAT(date_arrivee, '%d/%m/%Y') as date_arrivee, DATE_FORMAT(date_depart, '%d/%m/%Y') as date_depart, prix, etat FROM produit WHERE etat = 'libre' AND date_arrivee > CURRENT_DATE LIMIT " . (($cPage-1)*$perPage) . ", $perPage");
 $produit = $recup_produit -> fetchAll(PDO::FETCH_ASSOC);
 
 $resultat = $pdo -> query("SELECT DISTINCT s.categorie FROM produit p, salle s WHERE p.id_salle = s.id_salle");
@@ -55,8 +70,6 @@ require_once('inc/header.inc.php');
 
 	                	<?php $salle = getSalle($valeur['id_salle']) ?>
 	                	<?php $description = strlen($salle['description']); ?>
-
-	                	<?php if ($valeur['etat'] == 'libre' && strtotime(str_replace('/', '-', $valeur['date_arrivee'])) > $date_actuelle): ?>
 		                    <div class="col-sm-4 col-lg-4 col-md-4">
 		                        <div class="thumbnail">
 		                            <img src="<?= RACINE_SITE . 'photo/' . $salle['photo']; ?>">
@@ -75,8 +88,17 @@ require_once('inc/header.inc.php');
 		                            </div>
 		                        </div>
 		                    </div>
-	                    <?php endif ?>
 	                <?php endforeach; ?>
+                </div>
+                <div class="row">
+                	<?php 
+                	if ($nbPage > 1) { ?>
+	                	<ul class="pagination">
+		                	<?php for ($i=1; $i <= $nbPage; $i++) { ?>
+		                		<li><a href="index.php?p=<?= $i ?>"><?= $i ?></a></li>	
+		                	<?php } ?>
+		                </ul>
+	                <?php } ?>
                 </div>
             </div>
         </div>
