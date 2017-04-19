@@ -32,6 +32,12 @@ if($_POST) {
 		if(!is_numeric($_POST['prix'])) {
 			$msg .= '<div class="erreur">Le prix n\'est pas correct, veuillez entrer un nombre entier.</div>';
 		}
+		/*$format ="Y-m-d H:i";
+		if(DateTime::createFromFormat($format,$_POST['date_arrivee']) === false || DateTime::createFromFormat($format,$_POST['date_depart']) === false){
+			$msg .= '<div class="erreur">Le format de la date doit être jj/mm/aaaa hh:mm</div>';
+		} elseif(strtotime(str_replace('/', '-', $_POST['date_arrivee'])) > strtotime(str_replace('/', '-', $_POST['date_depart']))){
+			$msg .= '<div class="erreur">La date d\'arrivé doit être inférieure à la date de départ.</div>';
+		}*/
 	}
 
 	if (empty($msg)) {
@@ -118,9 +124,20 @@ require_once('../inc/header.inc.php');
 					<?php endif; ?>
 				<?php endforeach; ?>
 				<td><a href="gestion_produit.php?id=<?= $valeur['id_produit']; ?>&action=details"><i class="fa fa-search" aria-hidden="true"></i></a></td>
-				<td><a href="gestion_produit.php?id=<?= $valeur['id_produit']; ?>"><img src="<?= RACINE_SITE . 'img/edit.png' ?>"></a></td>
-				<td><a href="supprimer_poduit.php?id=<?= $valeur['id_produit']; ?>"><img src="<?= RACINE_SITE . 'img/delete.png' ?>"></a></td>
+				<td><a href="gestion_produit.php?id=<?= $valeur['id_produit']; ?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
+				<td><a href="#" onClick="<?php if($valeur['etat'] == "reservation"): ?>InfoMessage()<?php else: ?>ConfirmSuppr()<?php endif; ?>" ><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
 			</tr>
+			<script type="text/javascript">
+				function ConfirmSuppr() {
+					if (confirm("Voulez-vous supprimer ce produit ?")) { // Clic sur OK
+						document.location.href="supprimer_poduit.php?id=<?= $valeur['id_produit']; ?>";
+					}
+				}
+
+				function InfoMessage() {
+					alert("Vous ne pouvez pas supprimer ce produit car il a déjà été commandé !");
+				}
+			</script>
 		<?php endforeach; ?>
 	</table>
 <?php else: ?>

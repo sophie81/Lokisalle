@@ -72,3 +72,25 @@ function getProduit($id_produit)
 
 	return $produit;
 }
+
+function haveCommande($id_salle){
+	global $pdo;
+	$resultat = $pdo -> query("SELECT * FROM produit WHERE id_salle = $id_salle AND etat = 'reservation'");
+
+	if($resultat -> rowCount() > 0){
+		return TRUE;
+	} else {
+		return FALSE;
+	}
+}
+
+function haveCommandeByMembre($id_membre){
+	global $pdo;
+	$resultat = $pdo -> query("SELECT * FROM commande WHERE id_membre = $id_membre");
+
+	if($resultat -> rowCount() > 0){
+		return TRUE;
+	} else {
+		return FALSE;
+	}
+}

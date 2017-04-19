@@ -9,7 +9,7 @@ $recup_commande = $pdo -> query('SELECT c.id_commande, c.id_membre, c.id_produit
 $commande = $recup_commande -> fetchAll(PDO::FETCH_ASSOC);
 
 if (isset($_GET['id']) && !empty($_GET['id']) && is_numeric($_GET['id'])) {
-	$resultat = $pdo -> prepare('SELECT c.id_commande, c.id_membre, c.id_produit, p.prix, DATE_FORMAT(c.date_enregistrement, "%d/%m/%Y %H:%m") as date_enregistrement  FROM produit p, commande c WHERE c.id_produit = p.id_produit');
+	$resultat = $pdo -> prepare('SELECT c.id_commande, c.id_membre, c.id_produit, p.prix, DATE_FORMAT(c.date_enregistrement, "%d/%m/%Y %H:%m") as date_enregistrement  FROM produit p, commande c WHERE c.id_produit = p.id_produit AND c.id_commande = :id');
 	$resultat -> bindParam(':id', $_GET['id'], PDO::PARAM_INT);
 	$resultat -> execute();
 
@@ -21,9 +21,6 @@ if (isset($_GET['id']) && !empty($_GET['id']) && is_numeric($_GET['id'])) {
 $id_commande = (isset($commande_actuel)) ? $commande_actuel['id_commande'] : '';
 $prix = (isset($commande_actuel)) ? $commande_actuel['prix'] : '';
 $date_enregistrement = (isset($commande_actuel)) ? $commande_actuel['date_enregistrement'] : '';
-
-date_default_timezone_set('Europe/Paris');
-$date_actuelle = strtotime(str_replace('/', '-', date('d/m/Y')));
 
 
 require_once('../inc/header.inc.php');
@@ -59,9 +56,19 @@ require_once('../inc/header.inc.php');
 				<?php endforeach; ?>
 				<td><a href="gestion_commande.php?id=<?= $valeur['id_commande']; ?>"><i class="fa fa-search" aria-hidden="true"></i></a></td>
 				<?php $produit = getProduit($valeur['id_produit']); ?>
-				<?php if(strtotime(str_replace('/', '-', $produit['date_arrivee'])) > $date_actuelle): ?>
-					<td><a href="supprimer_commande.php?id=<?= $valeur['id_commande']; ?>"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
-				<?php endif; ?>
+					<td><a href="#" onClick="<?php if(strtotime(str_replace('/', '-', $produit['date_arrivee'])) < $date_actuelle): ?>InfoMessage()<?php else: ?>ConfirmSuppr()<?php endif; ?>" ><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+					</td>
+				<script type="text/javascript">
+					function ConfirmSuppr() {
+						if (confirm("Voulez-vous supprimer cette commande ?")) { // Clic sur OK
+							document.location.href="supprimer_commande.php?id=<?= $valeur['id_commande']; ?>";
+						}
+					}
+
+					function InfoMessage() {
+						alert("Vous ne pouvez pas supprimer cette commande car la date d'arrivée est inférieure à la date actuelle !");
+					}
+				</script>
 			</tr>
 		<?php endforeach; ?>
 		
@@ -78,29 +85,16 @@ require_once('../inc/header.inc.php');
 		<ul class="list-group">
 			<li class="list-group-item"><b>ID commande :</b> <span><?= $id_commande; ?></span></li>
 			<li class="list-group-item">
-				<?php foreach($commande_actuel as $indice_commande => $valeur_commande): ?>
-					<?php if($indice_commande == 'id_membre'): ?>
-						<?php $membre_val = getMembre($valeur_commande); ?>
-						<span><b>ID membre&nbsp;:&nbsp;</b> <?= $membre_val['id_membre']; ?> <br>
-						<b>Email membre&nbsp;:&nbsp;</b> <?= $membre_val['email']; ?></span>
-					<?php endif; ?>
-				<?php endforeach; ?>
+				<?php $membre_val = getMembre($commande_actuel['id_membre']); ?>
+				<span><b>ID membre&nbsp;:&nbsp;</b> <?= $membre_val['id_membre']; ?> <br>
+				<b>Email membre&nbsp;:&nbsp;</b> <?= $membre_val['email']; ?></span>
 			</li>
 			<li class="list-group-item">
-				<?php foreach($commande_actuel as $indice_salle => $valeur_salle): ?>
-					<?php if($indice_salle == 'id_produit'): ?>
-						<?php $salle_val = getSalle($valeur_salle); ?>
-						<span><b>ID produit&nbsp;:&nbsp;</b> <?= $salle_val['id_salle']; ?> <br>
-						<b>Titre de la salle&nbsp;:&nbsp;</b> <?= $salle_val['titre']; ?></span> <br>
-					<?php endif; ?>
-				<?php endforeach; ?>
-				<?php foreach($commande_actuel as $indice_produit => $valeur_produit): ?>
-					<?php if($indice_produit == 'id_produit'): ?>
-						<?php $produit_val = getProduit($valeur_produit); ?>
-						<span><b>Date d'arrivée&nbsp;:&nbsp;</b><?= $produit_val['date_arrivee']; ?></span> <br>
-						<span><b>Date de départ&nbsp;:&nbsp;</b><?= $produit_val['date_depart']; ?></span>
-					<?php endif; ?>
-				<?php endforeach; ?>
+				<?php $produit_val = getProduit($commande_actuel['id_produit']); $salle_val = getSalle($produit_val['id_salle']);?>
+				<span><b>ID produit&nbsp;:&nbsp;</b> <?= $salle_val['id_salle']; ?> <br>
+				<b>Titre de la salle&nbsp;:&nbsp;</b> <?= $salle_val['titre']; ?></span> <br>
+				<span><b>Date d'arrivée&nbsp;:&nbsp;</b><?= $produit_val['date_arrivee']; ?></span> <br>
+				<span><b>Date de départ&nbsp;:&nbsp;</b><?= $produit_val['date_depart']; ?></span>
 			</li>
 			<li class="list-group-item"><b>Prix :</b> <span><?= $prix; ?> €</span></li>
 			<li class="list-group-item"><b>Date d'enregistrement :</b> <span><?= $date_enregistrement; ?></span></li>
