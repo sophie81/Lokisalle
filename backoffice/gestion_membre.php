@@ -141,7 +141,7 @@ require_once('../inc/header.inc.php');
 
 <h1>Gestion des membres</h1>
 <?php if(!empty($membre)): ?>
-<table border="1" class="table table-striped table-bordered table-hover">
+<table class="table table-striped table-bordered table-hover">
 	<tr>
 		<?php for($i = 0; $i < $recup_membre -> columnCount(); $i++): ?>
 			<?php $colonne = $recup_membre -> getColumnMeta($i); ?>
@@ -187,7 +187,7 @@ require_once('../inc/header.inc.php');
 
 <h2><?= $action; ?>un membre</h2>
 <?= $msg; ?>
-<form action="" method="post" enctype="multipart/form-data">
+<form action="#" method="post" enctype="multipart/form-data">
 	<div class="col-lg-6">
 		<label>Pseudo : </label><br/>
 		<input type="text" name="pseudo" value="<?= $pseudo;  ?>" <?= $disabled; ?> placeholder="Pseudo"  /> <br/><br/>
@@ -209,14 +209,14 @@ require_once('../inc/header.inc.php');
 	<div class="col-lg-6">
 		<label>Civilite : </label><br/>
 		<select name="civilite">
-			<option selected="true" disabled>-- Selectionnez --</option>
+			<option selected disabled>-- Selectionnez --</option>
 			<option value="Homme" <?= ($civilite == 'Homme') ? 'selected' : '' ?> <?= $disabled; ?> >Homme</option>
 			<option value="Femme" <?= ($civilite == 'Femme') ? 'selected' : '' ?> <?= $disabled; ?> >Femme</option>
 		</select><br/><br/>
 
 		<label>Statut : </label><br/>
 		<select name="statut">
-			<option selected="true" disabled>-- Selectionnez --</option>
+			<option selected disabled>-- Selectionnez --</option>
 			<option value="1" <?= ($statut == '1') ? 'selected' : '' ?> <?= $disabled; ?> >Admin</option>
 			<option value="0" <?= ($statut == '0') ? 'selected' : '' ?> <?= $disabled; ?> >Membre</option>
 		</select><br/><br/>

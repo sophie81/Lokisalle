@@ -19,16 +19,21 @@ if($_POST){
 			$test = $check;
 		}
 
-
 		$resultat = $pdo -> prepare("INSERT INTO avis (id_membre, id_salle, commentaire, note, date_enregistrement) VALUES (:id_membre, :id_salle, :commentaire, $test, NOW())");
 
 		//STR
 		$resultat -> bindParam(':id_membre', $_POST['id_membre'], PDO::PARAM_INT);
 		$resultat -> bindParam(':id_salle', $_POST['id_salle'], PDO::PARAM_INT);
 		$resultat -> bindParam(':commentaire', $_POST['commentaire'], PDO::PARAM_STR);
+
+		$recup_produit = $pdo -> prepare("SELECT p.id_produit, p.id_salle, a.id_salle FROM produit p, avis a WHERE p.id_salle = :id_salle");
+		$recup_produit -> bindParam(':id_salle', $_POST['id_salle'], PDO::PARAM_INT);
+		$recup_produit -> execute();
+
+		foreach ($recup_produit as $indice => $valeur) { $valeur['id_produit']; }
 		
 		if($resultat -> execute()){
-			header('location:index.php');
+			header('location:fiche_produit.php?id='.$valeur['id_produit']);
 		}
 	}
 }

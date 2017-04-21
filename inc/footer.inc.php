@@ -10,7 +10,7 @@
 				</ul>
 			</div>
         </footer>
-    </body>
     <script src="<?= RACINE_SITE ?>js/jquery.min.js"></script>
     <script src="<?= RACINE_SITE ?>js/bootstrap.min.js"></script>
+    </body>
 </html>

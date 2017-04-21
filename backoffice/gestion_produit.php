@@ -108,7 +108,7 @@ require_once('../inc/header.inc.php');
 
 <h1>Gestion des produits</h1>
 <?php if(!empty($produits)): ?>
-	<table border="1" class="table table-striped table-bordered table-hover">
+	<table class="table table-striped table-bordered table-hover table-responsive">
 		<tr>
 			<?php for($i = 0; $i < $resultat -> columnCount(); $i++): ?>
 				<?php $colonne = $resultat -> getColumnMeta($i); ?>
@@ -122,7 +122,7 @@ require_once('../inc/header.inc.php');
 				<?php foreach($valeur as $indice2 => $valeur2): ?>
 					<?php if($indice2 == 'id_salle'): ?>
 						<?php $salle_val = getSalle($valeur2); ?>
-						<td><?= $salle_val['id_salle']; ?> - <?= $salle_val['titre']; ?><br> <img src="<?= RACINE_SITE . 'photo/' . $salle_val['photo']; ?>"" height="80"></td>
+						<td><?= $salle_val['id_salle']; ?> - <?= $salle_val['titre']; ?><br> <img src="<?= RACINE_SITE . 'photo/' . $salle_val['photo']; ?>" height="80" alt="Lokisalle bureau"></td>
 					<?php elseif ($indice2 == 'prix'): ?>
 						<td><?= $valeur2 ?> €</td>
 					<?php else: ?>
@@ -151,7 +151,7 @@ require_once('../inc/header.inc.php');
 <?php endif; ?>
 	<h2><?= $action; ?>un produit</h2>
 		<?= $msg ?>
-		<form action="" method="post">
+		<form action="#" method="post">
 			<div class="col-md-6">
 				<label>Date d'arrivée : </label><br/>
 				<input type="text" name="date_arrivee" placeholder="jj/mm/aaaa hh:mm" value="<?= $date_arrivee ?>" <?= $disabled; ?>/><br/><br/>

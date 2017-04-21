@@ -24,9 +24,9 @@ require_once('../inc/header.inc.php');
 
 <h1>Dashboard</h1>
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-6">
         <h2>Top 5 des salles les mieux notées</h2>
-        <div class="col-md-6">
+        <div class="col-md-12">
             <ul class="list-group">
                 <?php foreach($stat1 as $indice => $valeur): ?>
                     <li class="list-group-item"><?= $valeur['titre']?> - <?= round($valeur['moy_note'], 2)?></li>
@@ -34,9 +34,9 @@ require_once('../inc/header.inc.php');
             </ul>
         </div>
     </div>
-    <div class="col-md-12">
+    <div class="col-md-6">
         <h2>Top 5 des salles les plus commandées</h2>
-        <div class="col-md-6">
+        <div class="col-md-12">
             <ul class="list-group">
                 <?php foreach($stat2 as $indice => $valeur): ?>
                     <li class="list-group-item"><?= $valeur['titre']?> - <?= $valeur['nb_commande']?></li>
@@ -44,9 +44,11 @@ require_once('../inc/header.inc.php');
             </ul>
         </div>
     </div>
-    <div class="col-md-12">
+</div>
+<div class="row">
+    <div class="col-md-6">
         <h2>Top 5 des membres qui achètent le plus</h2>
-        <div class="col-md-6">
+        <div class="col-md-12">
             <ul class="list-group">
                 <?php foreach($stat3 as $indice => $valeur): ?>
                     <li class="list-group-item"><?= $valeur['nom']?> <?= $valeur['prenom']?> - <?= $valeur['nb_commande']?></li>
@@ -54,9 +56,9 @@ require_once('../inc/header.inc.php');
             </ul>
         </div>
     </div>
-    <div class="col-md-12">
+    <div class="col-md-6">
         <h2>Top 5 des membres qui achètent le plus cher</h2>
-        <div class="col-md-6">
+        <div class="col-md-12">
             <ul class="list-group">
                 <?php foreach($stat4 as $indice => $valeur): ?>
                     <li class="list-group-item"><?= $valeur['nom']?> <?= $valeur['prenom']?> - <?= intval($valeur['moy_prix']);?> €</li>

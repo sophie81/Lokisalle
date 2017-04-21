@@ -65,13 +65,6 @@ require_once('inc/header.inc.php');
         <div class="col-md-4">
             <h3>Description</h3>
             <p><?= $salle['description']; ?></p>
-            <h3>Localisation</h3>
-            <ul>
-                <li>Lorem Ipsum</li>
-                <li>Dolor Sit Amet</li>
-                <li>Consectetur</li>
-                <li>Adipiscing Elit</li>
-            </ul>
         </div>
 
     </div>

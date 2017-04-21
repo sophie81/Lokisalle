@@ -29,7 +29,7 @@ require_once('../inc/header.inc.php');
 
 <h1>Gestion des commandes</h1>
 <?php if(!empty($commande)): ?>
-	<table border="1" class="table table-striped table-bordered table-hover">
+	<table class="table table-striped table-bordered table-hover">
 		<tr>
 			<?php for($i = 0; $i < $recup_commande -> columnCount(); $i++): ?>
 				<?php $colonne = $recup_commande -> getColumnMeta($i); ?>
