@@ -163,21 +163,9 @@ require_once('../inc/header.inc.php');
 				<?php endforeach; ?>
 				<td><a href="gestion_salle.php?id=<?= $valeur['id_salle']; ?>&action=details"><i class="fa fa-search" aria-hidden="true"></i></a></td>
 				<td><a href="gestion_salle.php?id=<?= $valeur['id_salle']; ?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
-				<td><?php $commande = haveCommande($valeur['id_salle']); ?><a href="#" onClick="<?php if($commande): ?>InfoMessage()<?php else: ?>ConfirmSuppr(<?= $valeur['id_salle']; ?>)<?php endif; ?>"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
-				<script type="text/javascript">
-					function ConfirmSuppr(salle) {
-						if (confirm("Voulez-vous supprimer cette salle ? Cela entrainera la suppression des produits non commandé ainsi que des commentaires.")) { // Clic sur OK
-							document.location.href="supprimer_salle.php?id="+salle;
-						}
-					}
-
-					function InfoMessage() {
-						alert("Vous ne pouvez pas supprimer cette salle car elle a été commandée !");
-					}
-				</script>
+				<td><?php $commande = haveCommande($valeur['id_salle']); ?><a href="#" onClick="<?php if($commande): ?>InfoMessage('Vous ne pouvez pas supprimer cette salle car elle a été commandée !')<?php else: ?>ConfirmSupprSalle(<?= $valeur['id_salle']; ?>)<?php endif; ?>"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
 			</tr>
 		<?php endforeach; ?>
-
 	</table>
 
 <?php else: ?>

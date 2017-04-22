@@ -131,19 +131,8 @@ require_once('../inc/header.inc.php');
 				<?php endforeach; ?>
 				<td><a href="gestion_produit.php?id=<?= $valeur['id_produit']; ?>&action=details"><i class="fa fa-search" aria-hidden="true"></i></a></td>
 				<td><a href="gestion_produit.php?id=<?= $valeur['id_produit']; ?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
-				<td><a href="#" onClick="<?php if($valeur['etat'] == "reservation"): ?>InfoMessage()<?php else: ?>ConfirmSuppr(<?= $valeur['id_produit']; ?>)<?php endif; ?>" ><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
+				<td><a href="#" onClick="<?php if($valeur['etat'] == "reservation"): ?>InfoMessage('Vous ne pouvez pas supprimer ce produit car il a déjà été commandé !')<?php else: ?>ConfirmSupprProduit(<?= $valeur['id_produit']; ?>)<?php endif; ?>" ><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
 			</tr>
-			<script type="text/javascript">
-				function ConfirmSuppr(produit) {
-					if (confirm("Voulez-vous supprimer ce produit ?")) { // Clic sur OK
-						document.location.href="supprimer_produit.php?id="+produit;
-					}
-				}
-
-				function InfoMessage() {
-					alert("Vous ne pouvez pas supprimer ce produit car il a déjà été commandé !");
-				}
-			</script>
 		<?php endforeach; ?>
 	</table>
 <?php else: ?>

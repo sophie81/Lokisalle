@@ -165,21 +165,9 @@ require_once('../inc/header.inc.php');
 			<?php endforeach; ?>
 			<td><a href="gestion_membre.php?id=<?= $valeur['id_membre']; ?>&action=details"><i class="fa fa-search" aria-hidden="true"></i></a></td>
 			<td><a href="gestion_membre.php?id=<?= $valeur['id_membre']; ?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
-			<td><?php $commande = haveCommandeByMembre($valeur['id_membre']); ?><a href="#" onClick="<?php if($commande): ?>InfoMessage()<?php else: ?>ConfirmSuppr(<?= $valeur['id_membre']; ?>)<?php endif; ?>"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
-			<script type="text/javascript">
-				function ConfirmSuppr(membre) {
-					if (confirm("Voulez-vous supprimer ce membre ? Cela entrainera la suppression des avis qu'il a rédigé.")) { // Clic sur OK
-						document.location.href="supprimer_membre.php?id="+membre;
-					}
-				}
-
-				function InfoMessage() {
-					alert("Vous ne pouvez pas supprimer ce membre car il a effectué des commandes !");
-				}
-			</script>
+			<td><?php $commande = haveCommandeByMembre($valeur['id_membre']); ?><a href="#" onClick="<?php if($commande): ?>InfoMessage('Vous ne pouvez pas supprimer ce membre car il a effectué des commandes !')<?php else: ?>ConfirmSupprMembre(<?= $valeur['id_membre']; ?>)<?php endif; ?>"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
 		</tr>
 	<?php endforeach; ?>
-	
 </table>
 <?php else: ?>
 	<p>Aucun membre</p>

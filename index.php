@@ -1,37 +1,6 @@
-<script type="text/javascript">
-	function showFilter()
-	{
-		var categorie = document.getElementById('categorie').value;
-		var ville = document.getElementById('ville').value;
-		var capacite = document.getElementById('capacite').value;
-		var prix = document.getElementById('prix').value;
-
-		document.getElementById('valuePrix').innerHTML = prix;
-
-		if (window.XMLHttpRequest)
-		{// code for IE7+, Firefox, Chrome, Opera, Safari
-			xmlhttp=new XMLHttpRequest();
-		}
-		else
-		{// code for IE6, IE5
-			xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-		}
-		xmlhttp.onreadystatechange=function()
-		{
-			if (xmlhttp.readyState==4 && xmlhttp.status==200)
-			{
-				document.getElementById("txtHint").innerHTML=xmlhttp.responseText;
-			}
-		}
-		xmlhttp.open("GET","getFilter.php?categorie="+categorie+"&ville="+ville+"&capacite="+capacite+"&prix="+prix,true);
-		xmlhttp.send();
-	}
-
-
-</script>
-
 <?php
 require_once('inc/init.inc.php');
+
 /**** PAGINATION ****/
 $resultat_page = $pdo -> query('SELECT COUNT(id_produit) as nbProduit FROM produit WHERE etat = "libre" AND date_arrivee > CURRENT_DATE');
 $data = $resultat_page -> fetch(PDO::FETCH_ASSOC);

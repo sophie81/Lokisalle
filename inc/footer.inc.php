@@ -12,5 +12,6 @@
         </footer>
     <script src="<?= RACINE_SITE ?>js/jquery.min.js"></script>
     <script src="<?= RACINE_SITE ?>js/bootstrap.min.js"></script>
+    <script src="<?= RACINE_SITE ?>js/fonctions.js"></script>
     </body>
 </html>
