@@ -11,29 +11,7 @@
 				<nav class="navbar navbar-default navbar-static-top" style="margin-bottom: 0">
 		            <div class="navbar-header">
 		                <a class="navbar-brand" href="<?= RACINE_SITE ?>index.php">Lokisalle</a>
-		                <?php if(userAdmin()) : ?>
-		                	
-		                	<ul class="nav navbar-top-links navbar-left">
-		                        <li>
-		                            <a href="<?= RACINE_SITE ?>backoffice/dashboard.php">Dashboard</a>
-		                        </li>
-		                        <li>
-		                            <a href="<?= RACINE_SITE ?>backoffice/gestion_salle.php">Gestion des salles</a>
-		                        </li>
-		                        <li>
-		                            <a href="<?= RACINE_SITE ?>backoffice/gestion_produit.php">Gestion des produits</a>
-		                        </li>
-		                        <li>
-		                            <a href="<?= RACINE_SITE ?>backoffice/gestion_membre.php">Gestions des membres</a>
-		                        </li>
-		                        <li>
-		                            <a href="<?= RACINE_SITE ?>backoffice/gestion_avis.php">Gestions des avis</a>
-		                        </li>
-		                        <li>
-		                            <a href="<?= RACINE_SITE ?>backoffice/gestion_commande.php">Gestion des commandes</a>
-		                        </li>
-		                    </ul>
-		                <?php elseif(!userAdmin()): ?>
+		                <?php if(!userAdmin()): ?>
 		                	<ul class="nav navbar-top-links navbar-left">
 		                		<li><a href="">Qui sommes nous</a></li>
 			                	<li><a href="<?= RACINE_SITE ?>contact.php">Contact</a></li>
@@ -43,6 +21,34 @@
 		            <!-- /.navbar-header -->
 
 		            <ul class="nav navbar-top-links navbar-right">
+			            <?php if(userAdmin()) : ?>
+			            	<li class="dropdown">
+			            		<div class="dropdown-toggle" data-toggle="dropdown">
+			                        <i class="fa fa-cog" aria-hidden="true"></i>&nbsp;Gestion <i class="fa fa-caret-down"></i>
+			                    </div>
+			                    <ul class="dropdown-menu dropdown-user">
+				            		<li>
+			                            <a href="<?= RACINE_SITE ?>backoffice/dashboard.php">Dashboard</a>
+			                        </li>
+			                        <li class="divider"></li>
+			                        <li>
+			                            <a href="<?= RACINE_SITE ?>backoffice/gestion_salle.php">Gestion des salles</a>
+			                        </li>
+			                        <li>
+			                            <a href="<?= RACINE_SITE ?>backoffice/gestion_produit.php">Gestion des produits</a>
+			                        </li>
+			                        <li>
+			                            <a href="<?= RACINE_SITE ?>backoffice/gestion_membre.php">Gestions des membres</a>
+			                        </li>
+			                        <li>
+			                            <a href="<?= RACINE_SITE ?>backoffice/gestion_avis.php">Gestions des avis</a>
+			                        </li>
+			                        <li>
+			                            <a href="<?= RACINE_SITE ?>backoffice/gestion_commande.php">Gestion des commandes</a>
+			                        </li>
+			                    </ul>
+			                <?php endif; ?>
+		            	</li>
 						<li class="dropdown">
 		                    <div class="dropdown-toggle" data-toggle="dropdown">
 		                        <i class="fa fa-user fa-fw"></i>Espace Membre <i class="fa fa-caret-down"></i>

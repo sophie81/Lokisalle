@@ -22,8 +22,17 @@ header  nav  a:hover, a.active{ background: #04baf6; }
 .dropdown div.dropdown-toggle { padding: 15px; min-height: 50px;}
 .navbar-default.sidebar { display: none; }
 .navbar-top-links li a {font-size: 14px; color: #777;}
+.navbar-brand { float: none; display: block; }
 
-@media (min-width: 768px) { .sidebar { z-index: 1; position: absolute; width: 250px; margin-top: 51px; } .navbar-top-links .dropdown-messages, .navbar-top-links .dropdown-tasks, .navbar-top-links .dropdown-alerts {margin-left: auto; }}
+@media (min-width: 768px) { 
+	.sidebar { z-index: 1; position: absolute; width: 250px; margin-top: 51px; } 
+	.navbar-top-links .dropdown-messages, .navbar-top-links .dropdown-tasks, 
+	.navbar-top-links .dropdown-alerts {margin-left: auto; }
+}
+
+@media (min-width: 992px) { 
+	.navbar-brand { float: left; }
+}
 
 /**************************************************** MILIEU ************************************************/
 
