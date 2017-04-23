@@ -13,7 +13,7 @@
 		                <a class="navbar-brand" href="<?= RACINE_SITE ?>index.php">Lokisalle</a>
 		                <?php if(!userAdmin()): ?>
 		                	<ul class="nav navbar-top-links navbar-left">
-		                		<li><a href="">Qui sommes nous</a></li>
+		                		<li><a href="<?= RACINE_SITE ?>qui-somme-nous.php">Qui sommes nous</a></li>
 			                	<li><a href="<?= RACINE_SITE ?>contact.php">Contact</a></li>
 		                	</ul>
 			            <?php endif; ?>
