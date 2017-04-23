@@ -125,6 +125,7 @@ require_once('inc/header.inc.php');
         </div>
         <div class="col-lg-12">
         	<ul class="list-group">
+            <?php if($avis): ?>
         		<?php foreach($avis as $avis_val) : ?>
         			<?php $membre = getMembre($avis_val['id_membre']); ?>
 			        <li class="list-group-item">
@@ -138,6 +139,9 @@ require_once('inc/header.inc.php');
 			        	<p><i><?= $avis_val['date_enregistrement']; ?></i></p>
 			        </li>
 				<?php endforeach; ?>
+            <?php else: ?>
+                <p>Aucun commentaire.</p>
+            <?php endif; ?>
         	</ul>
         </div>
         <?php if(userConnecte()) : ?>
