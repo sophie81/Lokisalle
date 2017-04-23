@@ -61,7 +61,6 @@ require_once('../inc/header.inc.php');
 						</td>
 				</tr>
 			<?php endforeach; ?>
-			
 		</table>
 	</div>
 <?php else: ?>

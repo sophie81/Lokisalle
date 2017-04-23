@@ -73,6 +73,18 @@ function getProduit($id_produit)
 	return $produit;
 }
 
+function getNoteBySalle($id_salle){
+	global $pdo;
+
+	$recup_note = $pdo -> query("SELECT AVG(note) AS moy_note FROM avis WHERE id_salle = $id_salle GROUP BY id_salle");
+
+	$note = $recup_note -> fetch(PDO::FETCH_ASSOC);
+	$note = ceil($note['moy_note']);
+
+	//var_dump($note);
+	return $note;
+}
+
 function haveCommande($id_salle){
 	global $pdo;
 	$resultat = $pdo -> query("SELECT * FROM produit WHERE id_salle = $id_salle AND etat = 'reservation'");

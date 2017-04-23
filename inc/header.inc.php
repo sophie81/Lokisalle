@@ -33,7 +33,7 @@
 		                            <a href="<?= RACINE_SITE ?>backoffice/gestion_commande.php">Gestion des commandes</a>
 		                        </li>
 		                    </ul>
-		                <?php elseif(!userConnecte()): ?>
+		                <?php elseif(!userAdmin()): ?>
 		                	<ul class="nav navbar-top-links navbar-left">
 		                		<li><a href="">Qui sommes nous</a></li>
 			                	<li><a href="<?= RACINE_SITE ?>contact.php">Contact</a></li>

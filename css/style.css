@@ -36,10 +36,11 @@ header  nav  a:hover, a.active{ background: #04baf6; }
   background-color: white;
 }
 
-#page-wrapper.front { padding: 0; margin: 0; }
+#page-wrapper.front { padding: 0; margin: auto; }
 
 .bo .fa { font-size: 25px; }
-.fa.fa-star { font-size: 15px; }
+.fa.fa-star { font-size: 14px; }
+.fa.fa-star-o { font-size: 14px; }
 
 /**************************************************** BAS ************************************************/
 footer{ background-color: #f8f8f8; color: #000; text-align: center; padding: 7px 0;}

@@ -102,7 +102,21 @@ require_once('inc/header.inc.php');
 							</div>
 							<div class="ratings">
 								<p class="pull-right"><a href="fiche_produit.php?id=<?= $valeur['id_produit']; ?>"><i class="fa fa-search" aria-hidden="true"></i> Voir</a></p>
-								<p >Note</p>
+								<p>Note :
+									<?php $note = getNoteBySalle($valeur['id_salle']); ?>
+									<?php if($note): ?>
+										<span>
+											<?php for($i=0; $i < $note; $i++):?>
+												<i class="fa fa-star" aria-hidden="true"></i>
+											<?php endfor; ?>
+											<?php for($i=$note; $i < 5; $i++):?>
+												<i class="fa fa-star-o" aria-hidden="true"></i>
+											<?php endfor; ?>
+										</span>
+									<?php else : ?>
+										<span>Aucun avis</span>
+									<?php endif; ?>
+								</p>
 							</div>
 						</div>
 					</div>

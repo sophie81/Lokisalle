@@ -76,6 +76,9 @@ require_once('../inc/header.inc.php');
 							<?php for($i=0; $i < $valeur2; $i++):?>
 								<i class="fa fa-star" aria-hidden="true"></i>
 							<?php endfor; ?>
+							<?php for($i=$valeur2; $i < 5; $i++):?>
+								<i class="fa fa-star-o" aria-hidden="true"></i>
+							<?php endfor; ?>
 							</td>
 						<?php else: ?>
 							<td><?= $valeur2 ?></td>
@@ -118,7 +121,14 @@ require_once('../inc/header.inc.php');
 				</li>
 				<li class="list-group-item"><b>Commentaire&nbsp;:</b> <span><?= $commentaire; ?></span></li>
 				<li class="list-group-item"><b>Note&nbsp;: </b>
-					<span><?= $note; ?></span>
+					<span>
+						<?php for($i=0; $i < $note; $i++):?>
+							<i class="fa fa-star" aria-hidden="true"></i>
+						<?php endfor; ?>
+						<?php for($i=$note; $i < 5; $i++):?>
+							<i class="fa fa-star-o" aria-hidden="true"></i>
+						<?php endfor; ?>
+					</span>
 				</li>
 				<li class="list-group-item">
 					<b>Date enregistrement&nbsp;:</b>

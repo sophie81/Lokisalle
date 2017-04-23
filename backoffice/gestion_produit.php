@@ -5,7 +5,7 @@ if (!userAdmin()) {
 	header("location:../connexion.php");
 }
 
-$resultat = $pdo -> query("SELECT * FROM produit");
+$resultat = $pdo -> query("SELECT id_produit, id_salle, DATE_FORMAT(date_arrivee, '%d/%m/%Y %H:%i') AS date_arrivee, DATE_FORMAT(date_depart, '%d/%m/%Y %H:%i') AS date_depart, prix, etat FROM produit ");
 $produits = $resultat -> fetchAll(PDO::FETCH_ASSOC);
 
 $resultatSalle = $pdo -> query("SELECT * FROM salle");
@@ -68,7 +68,7 @@ if($_POST) {
 
 
 if(isset($_GET['id']) && !empty($_GET['id']) && is_numeric($_GET['id'])){
-	$resultat = $pdo -> prepare("SELECT * FROM produit WHERE id_produit = :id");
+	$resultat = $pdo -> prepare("SELECT id_produit, id_salle, DATE_FORMAT(date_arrivee, '%d/%m/%Y %H:%i') AS date_arrivee, DATE_FORMAT(date_depart, '%d/%m/%Y %H:%i') AS date_depart, prix, etat FROM produit WHERE id_produit = :id");
 	$resultat -> bindParam(':id', $_GET['id'], PDO::PARAM_INT);
 	$resultat -> execute();
 
@@ -79,8 +79,8 @@ if(isset($_GET['id']) && !empty($_GET['id']) && is_numeric($_GET['id'])){
 
 if (isset($produit_actuel)) {
 	$id_salle = $produit_actuel['id_salle'];
-	$date_arrivee = str_replace(' ', 'T', $produit_actuel['date_arrivee']);
-	$date_depart = str_replace(' ', 'T', $produit_actuel['date_depart']);
+	$date_arrivee = $produit_actuel['date_arrivee'];
+	$date_depart = $produit_actuel['date_depart'];
 	$prix = $produit_actuel['prix'];
 } elseif (!empty($msg)) {
 	$id_salle = (isset($_POST['id_salle'])) ? $_POST['id_salle'] : '';
