@@ -141,34 +141,36 @@ require_once('../inc/header.inc.php');
 
 <h1>Gestion des membres</h1>
 <?php if(!empty($membre)): ?>
-<table class="table table-striped table-bordered table-hover">
-	<tr>
-		<?php for($i = 0; $i < $recup_membre -> columnCount(); $i++): ?>
-			<?php $colonne = $recup_membre -> getColumnMeta($i); ?>
-			<th><?= $colonne['name']; ?></th>
-		<?php endfor; ?>
-		<th colspan="3">Actions</th>
-	</tr>
-	
-	<?php foreach ($membre as $indice => $valeur): ?>
-		<tr>
-			<?php foreach($valeur as $indice2 => $valeur2): ?>
-				<?php if ($indice2 == 'statut'): ?>
-					<?php if($valeur2 == 0): ?>
-						<td>Membre</td>
-					<?php else: ?>
-						<td>Admin</td>
-					<?php endif; ?>
-				<?php else: ?>
-					<td><?= $valeur2 ?></td>
-				<?php endif; ?>
+	<div class="table-responsive">
+		<table class="table table-striped table-bordered table-hover">
+			<tr>
+				<?php for($i = 0; $i < $recup_membre -> columnCount(); $i++): ?>
+					<?php $colonne = $recup_membre -> getColumnMeta($i); ?>
+					<th><?= $colonne['name']; ?></th>
+				<?php endfor; ?>
+				<th colspan="3">Actions</th>
+			</tr>
+			
+			<?php foreach ($membre as $indice => $valeur): ?>
+				<tr>
+					<?php foreach($valeur as $indice2 => $valeur2): ?>
+						<?php if ($indice2 == 'statut'): ?>
+							<?php if($valeur2 == 0): ?>
+								<td>Membre</td>
+							<?php else: ?>
+								<td>Admin</td>
+							<?php endif; ?>
+						<?php else: ?>
+							<td><?= $valeur2 ?></td>
+						<?php endif; ?>
+					<?php endforeach; ?>
+					<td><a href="gestion_membre.php?id=<?= $valeur['id_membre']; ?>&action=details"><i class="fa fa-search" aria-hidden="true"></i></a></td>
+					<td><a href="gestion_membre.php?id=<?= $valeur['id_membre']; ?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
+					<td><?php $commande = haveCommandeByMembre($valeur['id_membre']); ?><a href="#" onClick="<?php if($commande): ?>InfoMessage('Vous ne pouvez pas supprimer ce membre car il a effectué des commandes !')<?php else: ?>ConfirmSupprMembre(<?= $valeur['id_membre']; ?>)<?php endif; ?>"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
+				</tr>
 			<?php endforeach; ?>
-			<td><a href="gestion_membre.php?id=<?= $valeur['id_membre']; ?>&action=details"><i class="fa fa-search" aria-hidden="true"></i></a></td>
-			<td><a href="gestion_membre.php?id=<?= $valeur['id_membre']; ?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
-			<td><?php $commande = haveCommandeByMembre($valeur['id_membre']); ?><a href="#" onClick="<?php if($commande): ?>InfoMessage('Vous ne pouvez pas supprimer ce membre car il a effectué des commandes !')<?php else: ?>ConfirmSupprMembre(<?= $valeur['id_membre']; ?>)<?php endif; ?>"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
-		</tr>
-	<?php endforeach; ?>
-</table>
+		</table>
+	</div>
 <?php else: ?>
 	<p>Aucun membre</p>
 <?php endif; ?>

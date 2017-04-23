@@ -59,7 +59,7 @@ require_once('inc/header.inc.php');
     <div class="row">
 
         <div class="col-md-8">
-            <img class="img-responsive" src="<?= RACINE_SITE . 'photo/' . $salle['photo'] ?>">
+            <img class="img-responsive" src="<?= RACINE_SITE . 'photo/' . $salle['photo'] ?>" alt="Lokisalle bureau">
         </div>
 
         <div class="col-md-4">

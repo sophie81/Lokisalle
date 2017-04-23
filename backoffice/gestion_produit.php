@@ -108,33 +108,35 @@ require_once('../inc/header.inc.php');
 
 <h1>Gestion des produits</h1>
 <?php if(!empty($produits)): ?>
-	<table class="table table-striped table-bordered table-hover table-responsive">
-		<tr>
-			<?php for($i = 0; $i < $resultat -> columnCount(); $i++): ?>
-				<?php $colonne = $resultat -> getColumnMeta($i); ?>
-				<th><?= $colonne['name']; ?></th>
-			<?php endfor; ?>
-			<th colspan="3">Actions</th>
-		</tr>
-		
-		<?php foreach ($produits as $indice => $valeur): ?>
+	<div class="table-responsive">
+		<table class="table table-striped table-bordered table-hover table-responsive">
 			<tr>
-				<?php foreach($valeur as $indice2 => $valeur2): ?>
-					<?php if($indice2 == 'id_salle'): ?>
-						<?php $salle_val = getSalle($valeur2); ?>
-						<td><?= $salle_val['id_salle']; ?> - <?= $salle_val['titre']; ?><br> <img src="<?= RACINE_SITE . 'photo/' . $salle_val['photo']; ?>" height="80" alt="Lokisalle bureau"></td>
-					<?php elseif ($indice2 == 'prix'): ?>
-						<td><?= $valeur2 ?> €</td>
-					<?php else: ?>
-						<td><?= $valeur2 ?></td>
-					<?php endif; ?>
-				<?php endforeach; ?>
-				<td><a href="gestion_produit.php?id=<?= $valeur['id_produit']; ?>&action=details"><i class="fa fa-search" aria-hidden="true"></i></a></td>
-				<td><a href="gestion_produit.php?id=<?= $valeur['id_produit']; ?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
-				<td><a href="#" onClick="<?php if($valeur['etat'] == "reservation"): ?>InfoMessage('Vous ne pouvez pas supprimer ce produit car il a déjà été commandé !')<?php else: ?>ConfirmSupprProduit(<?= $valeur['id_produit']; ?>)<?php endif; ?>" ><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
+				<?php for($i = 0; $i < $resultat -> columnCount(); $i++): ?>
+					<?php $colonne = $resultat -> getColumnMeta($i); ?>
+					<th><?= $colonne['name']; ?></th>
+				<?php endfor; ?>
+				<th colspan="3">Actions</th>
 			</tr>
-		<?php endforeach; ?>
-	</table>
+			
+			<?php foreach ($produits as $indice => $valeur): ?>
+				<tr>
+					<?php foreach($valeur as $indice2 => $valeur2): ?>
+						<?php if($indice2 == 'id_salle'): ?>
+							<?php $salle_val = getSalle($valeur2); ?>
+							<td><?= $salle_val['id_salle']; ?> - <?= $salle_val['titre']; ?><br> <img src="<?= RACINE_SITE . 'photo/' . $salle_val['photo']; ?>" height="80" alt="Lokisalle bureau"></td>
+						<?php elseif ($indice2 == 'prix'): ?>
+							<td><?= $valeur2 ?> €</td>
+						<?php else: ?>
+							<td><?= $valeur2 ?></td>
+						<?php endif; ?>
+					<?php endforeach; ?>
+					<td><a href="gestion_produit.php?id=<?= $valeur['id_produit']; ?>&action=details"><i class="fa fa-search" aria-hidden="true"></i></a></td>
+					<td><a href="gestion_produit.php?id=<?= $valeur['id_produit']; ?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
+					<td><a href="#" onClick="<?php if($valeur['etat'] == "reservation"): ?>InfoMessage('Vous ne pouvez pas supprimer ce produit car il a déjà été commandé !')<?php else: ?>ConfirmSupprProduit(<?= $valeur['id_produit']; ?>)<?php endif; ?>" ><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
+				</tr>
+			<?php endforeach; ?>
+		</table>
+	</div>
 <?php else: ?>
 	<p>Aucun produit</p>
 <?php endif; ?>

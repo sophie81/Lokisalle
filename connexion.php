@@ -48,7 +48,7 @@ require_once('inc/header.inc.php');
 		<div class="col-md-4 col-md-offset-4">
 			<h1 class="text-center">Se connecter</h1>
 			<?= $msg ?>
-			<form action="" method="post">
+			<form action="#" method="post">
 				<input type="text" name="pseudo" placeholder="Pseudo" /><br/><br/>
 				
 				<input type="password" name="mdp" placeholder="Mot de passe" /><br/><br/>

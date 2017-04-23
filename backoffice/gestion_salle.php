@@ -140,33 +140,34 @@ require_once('../inc/header.inc.php');
 <h1>Gestion des salles</h1>
 
 <?php if(!empty($salles)): ?>
-
-	<table class="table table-striped table-bordered table-hover">
-		<tr>
-			<?php for($i = 0; $i < $recup_salles -> columnCount(); $i++): ?>
-				<?php $colonne = $recup_salles -> getColumnMeta($i); ?>
-				<th><?= $colonne['name']; ?></th>
-			<?php endfor; ?>
-			<th colspan="3">Actions</th>
-		</tr>
-
-		<?php foreach ($salles as $indice => $valeur): ?>
+	<div class="table-responsive">
+		<table class="table table-striped table-bordered table-hover">
 			<tr>
-				<?php foreach($valeur as $indice2 => $valeur2): ?>
-					<?php if ($indice2 == 'photo'): ?>
-						<td><img src="<?= RACINE_SITE . 'photo/' . $valeur2; ?>" height="80" alt="Lokisalle bureau"></td>
-					<?php elseif($indice2 == 'description' && strlen($valeur2) > 40 ): ?>
-						<td><?= substr($valeur2, 0, 40) ?>...</td>
-					<?php else: ?>
-						<td><?= $valeur2 ?></td>
-					<?php endif; ?>
-				<?php endforeach; ?>
-				<td><a href="gestion_salle.php?id=<?= $valeur['id_salle']; ?>&action=details"><i class="fa fa-search" aria-hidden="true"></i></a></td>
-				<td><a href="gestion_salle.php?id=<?= $valeur['id_salle']; ?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
-				<td><?php $commande = haveCommande($valeur['id_salle']); ?><a href="#" onClick="<?php if($commande): ?>InfoMessage('Vous ne pouvez pas supprimer cette salle car elle a été commandée !')<?php else: ?>ConfirmSupprSalle(<?= $valeur['id_salle']; ?>)<?php endif; ?>"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
+				<?php for($i = 0; $i < $recup_salles -> columnCount(); $i++): ?>
+					<?php $colonne = $recup_salles -> getColumnMeta($i); ?>
+					<th><?= $colonne['name']; ?></th>
+				<?php endfor; ?>
+				<th colspan="3">Actions</th>
 			</tr>
-		<?php endforeach; ?>
-	</table>
+
+			<?php foreach ($salles as $indice => $valeur): ?>
+				<tr>
+					<?php foreach($valeur as $indice2 => $valeur2): ?>
+						<?php if ($indice2 == 'photo'): ?>
+							<td><img src="<?= RACINE_SITE . 'photo/' . $valeur2; ?>" height="80" alt="Lokisalle bureau"></td>
+						<?php elseif($indice2 == 'description' && strlen($valeur2) > 40 ): ?>
+							<td><?= substr($valeur2, 0, 40) ?>...</td>
+						<?php else: ?>
+							<td><?= $valeur2 ?></td>
+						<?php endif; ?>
+					<?php endforeach; ?>
+					<td><a href="gestion_salle.php?id=<?= $valeur['id_salle']; ?>&action=details"><i class="fa fa-search" aria-hidden="true"></i></a></td>
+					<td><a href="gestion_salle.php?id=<?= $valeur['id_salle']; ?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
+					<td><?php $commande = haveCommande($valeur['id_salle']); ?><a href="#" onClick="<?php if($commande): ?>InfoMessage('Vous ne pouvez pas supprimer cette salle car elle a été commandée !')<?php else: ?>ConfirmSupprSalle(<?= $valeur['id_salle']; ?>)<?php endif; ?>"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
+				</tr>
+			<?php endforeach; ?>
+		</table>
+	</div>
 
 <?php else: ?>
 	<p>Aucune salle</p>

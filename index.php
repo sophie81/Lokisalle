@@ -47,7 +47,6 @@ require_once('inc/header.inc.php');
 				<select class="form-control" name="categorie" id="categorie" onchange="showFilter()">
 					<option value="">Toutes catégories</option>
 				<?php foreach ($categories as $indice => $valeur): ?>
-					<?php var_dump($valeur); ?>
 					<option value="<?= $valeur['categorie'] ?>"><?= $valeur['categorie']; ?></option>
 				<?php endforeach; ?>
 				</select>
@@ -91,7 +90,7 @@ require_once('inc/header.inc.php');
 					<?php $description = strlen($salle['description']); ?>
 					<div class="col-sm-4 col-lg-4 col-md-4">
 						<div class="thumbnail">
-							<img src="<?= RACINE_SITE . 'photo/' . $salle['photo']; ?>">
+							<img src="<?= RACINE_SITE . 'photo/' . $salle['photo']; ?>" alt="Lokisalle bureau">
 							<div class="caption">
 								<h4 class="pull-right"><?= $valeur['prix']; ?> €</h4>
 								<h4><a href="fiche_produit.php?id=<?= $valeur['id_produit'];?>"><?= $salle['titre']; ?></a>
