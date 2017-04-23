@@ -40,10 +40,9 @@ require_once('inc/header.inc.php');
         <div class="col-lg-12">
             <h1 class="page-header">
             	<?= $salle['titre']; ?>
-                <small>Item Subheading</small>
             </h1>
             <?php if(userConnecte()) : ?>
-		       	<form action="reservation.php" method="post">
+		       	<form action="reservation.php" method="post" class="pull-right">
 					<input type="hidden"  name="id_membre" value="<?= $id_membre ?>"/>
 					
 					<input type="hidden"  name="id_produit" value="<?= $id_produit ?>"/>
