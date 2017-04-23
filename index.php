@@ -72,7 +72,7 @@ require_once('inc/header.inc.php');
 			<div class="list-group">
 				<label>Prix</label>
 				<input class="form-control" type="range" name="prix" id="prix" value="10000" min="100" max="10000" step="50" onchange="showFilter()" />
-				<p>Prix maximum : <span id="valuePrix">10000</span></p>
+				<p>Prix maximum : <span id="valuePrix">10000</span> €</p>
 			</div>
 			<!--<div class="list-group">
 				<label>Date d'arrivée : </label><br/>

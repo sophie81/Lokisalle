@@ -77,9 +77,9 @@ if(!empty($vide)){
         $description = strlen($salle['description']);
         echo "<div class=\"col-sm-4 col-lg-4 col-md-4\">";
         echo "<div class=\"thumbnail\">
-                <img src=\"" . RACINE_SITE . "photo/" . $salle['photo'] . "\">";
+                <img src=\"" . RACINE_SITE . "photo/" . $salle['photo'] . "\" alt=\"Lokisalle bureau\">";
         echo "<div class=\"caption\">
-                  <h4 class=\"pull-right\">" . $valeur['prix'] . "€</h4>
+                  <h4 class=\"pull-right\">" . $valeur['prix'] . " €</h4>
                   <h4><a href=\"fiche_produit.php?id=" . $valeur['id_produit'] . "\">" . $salle['titre'] . "</a>
                   </h4>
                   <p>" . substr($salle['description'], 0, 40);
@@ -87,14 +87,27 @@ if(!empty($vide)){
             echo "...";
         }
         echo "</p>
-                  <p><i class=\"fa fa-calendar\" aria-hidden=\"true\"></i>" . $valeur['date_arrivee'] . " au " . $valeur['date_depart'] . "</p>
+                  <p><i class=\"fa fa-calendar\" aria-hidden=\"true\"></i> " . $valeur['date_arrivee'] . " au " . $valeur['date_depart'] . "</p>
                 </div>";
         echo "<div class=\"ratings\">
                   <p class=\"pull-right\"><a href=\"fiche_produit.php?id=" . $valeur['id_produit'] . "\">
                     <i class=\"fa fa-search\" aria-hidden=\"true\"></i> Voir</a>
                   </p>
-                  <p>Note</p>
-                </div>";
+                  <p>";
+                    $note = getNoteBySalle($valeur['id_salle']);
+                    if($note) {
+                        echo "<span>";
+                        for ($i = 0; $i < $note; $i++) {
+                            echo "<i class=\"fa fa-star\" aria-hidden=\"true\"></i>";
+                        }
+                        for ($i = $note; $i < 5; $i++) {
+                            echo "<i class=\"fa fa-star-o\" aria-hidden=\"true\"></i>";
+                        }
+                        echo "</span>";
+                    } else {
+                        echo "<span>Aucun avis</span>";
+                    }
+                    echo "</p> </div>";
         echo "</div>";
         echo "</div>";
     }

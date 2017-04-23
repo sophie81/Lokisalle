@@ -26,7 +26,7 @@ $avis = $resultatAvis -> fetchAll(PDO::FETCH_ASSOC);
 $salle = getSalle($produit['id_salle']);
 
 //$resultat = $pdo -> query("SELECT * FROM produit WHERE categorie != '$categorie' ORDER BY prix DESC LIMIT 0,5");
-$resultats = $pdo -> query("SELECT * FROM produit WHERE id_produit != $id_produit");
+$resultats = $pdo -> query("SELECT p.id_produit, s.id_salle, s.photo FROM produit p, salle s WHERE s.id_salle = p.id_salle AND id_produit != $id_produit AND p.etat = 'libre' AND p.date_arrivee > CURRENT_DATE LIMIT 4");
 $suggestions = $resultats -> fetchAll(PDO::FETCH_ASSOC);
 
 $commentaire = (isset($_POST['commentaire'])) ? $_POST['commentaire'] : '';
@@ -111,13 +111,11 @@ require_once('inc/header.inc.php');
         </div>
         <?php foreach($suggestions as $valeur) : ?>
 	        <?php $salle = getSalle($valeur['id_salle']); ?>
-	       	<?php if ($valeur['etat'] == 'libre' && strtotime(str_replace('/', '-', $valeur['date_arrivee'])) > $date_actuelle): ?>
-				<div class="col-sm-3 col-xs-6">
-		            <a href="fiche_produit.php?id=<?= $valeur['id_produit']; ?>">
-		                <img class="img-responsive portfolio-item" src="<?= RACINE_SITE . 'photo/' . $salle['photo'] ?>" alt="">
-		            </a>
-		        </div>
-		    <?php endif; ?>
+			<div class="col-sm-3 col-xs-6">
+				<a href="fiche_produit.php?id=<?= $valeur['id_produit']; ?>">
+					<img class="img-responsive portfolio-item" src="<?= RACINE_SITE . 'photo/' . $salle['photo'] ?>" alt="">
+				</a>
+			</div>
 		<?php endforeach; ?>
     </div>
 

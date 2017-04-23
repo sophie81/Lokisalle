@@ -12,7 +12,7 @@ if (isset($_GET['id']) && !empty($_GET['id']) && is_numeric($_GET['id'])) {
 
 	if ($resultat -> rowCount() > 0) {
 		$salle = $resultat -> fetch(PDO::FETCH_ASSOC);
-		$commande = haveCommande($valeur['id_salle']);
+		$commande = haveCommande($salle['id_salle']);
 		if(!$commande) {
 			$chemin_photo_a_supprimer = RACINE_SERVEUR . RACINE_SITE . 'photo/' . $salle['photo'];
 

@@ -12,7 +12,7 @@ if (isset($_GET['id']) && !empty($_GET['id']) && is_numeric($_GET['id'])) {
 
 	if ($resultat -> rowCount() > 0) {
 		$membre = $resultat -> fetch(PDO::FETCH_ASSOC);
-		$commande = haveCommandeByMembre($valeur['id_membre']);
+		$commande = haveCommandeByMembre($membre['id_membre']);
 
 		if(!$commande) {
 			$resultat = $pdo->exec("DELETE FROM membre WHERE id_membre = $membre[id_membre]");
