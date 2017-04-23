@@ -122,7 +122,7 @@ require_once('inc/header.inc.php');
 					</div>
 				<?php endforeach; ?>
 			</div>
-			<div class="row">
+			<div class="row text-center">
 				<?php
 				if ($nbPage > 1) { ?>
 					<ul class="pagination">
