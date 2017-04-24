@@ -34,15 +34,6 @@ require_once('inc/header.inc.php');
 	<div class="row">
 		<div class="col-md-3">
 			<div class="list-group">
-				<?php if(isset($_GET) && !empty($_GET)): ?>
-					<label>Votre recherche :</label>
-					<ul class="list-group">
-						<?php foreach($_GET as $indice => $valeur): ?>
-							<li class="list-group-item"><b><?= $indice ?></b> : <?= $valeur ?></li>
-						<?php endforeach; ?>
-					</ul>
-					<a href="index.php" class="btn btn-primary mb-1">Reset</a><br>
-				<?php endif; ?>
 				<label>Categorie</label>
 				<select class="form-control" name="categorie" id="categorie" onchange="showFilter()">
 					<option value="">Toutes catégories</option>

@@ -11,19 +11,6 @@ $ville = $_GET['ville'];
 
 $prix = $_GET['prix'];
 
-
-/**** PAGINATION ****/
-$resultat_page = $pdo -> query('SELECT COUNT(id_produit) as nbProduit FROM produit WHERE etat = "libre" AND date_arrivee > CURRENT_DATE');
-$data = $resultat_page -> fetch(PDO::FETCH_ASSOC);
-$nbProduit = $data['nbProduit'];
-$perPage = 9;
-$nbPage = ceil($nbProduit/$perPage);
-if (isset($_GET['p']) && $_GET['p'] > 0 && $_GET['p'] <= $nbProduit) {
-    $cPage = $_GET['p'];
-} else {
-    $cPage = 1;
-}
-/**** /PAGINATION ****/
 $vide = "";
 $where = "";
 if (isset($_GET['categorie']) && !empty($_GET['categorie'])) {
@@ -48,7 +35,7 @@ if (isset($_GET['prix']) && !empty($_GET['prix'])) {
     $where .= "AND p.prix < :prix ";
 }
 
-$recup_produit = $pdo -> prepare("SELECT p.id_produit, p.id_salle, DATE_FORMAT(p.date_arrivee, '%d/%m/%Y') as date_arrivee, DATE_FORMAT(p.date_depart, '%d/%m/%Y') as date_depart, p.prix, p.etat FROM produit p, salle s WHERE p.id_salle=s.id_salle AND p.etat = 'libre' AND date_arrivee > CURRENT_DATE " . $where . "LIMIT " . (($cPage-1)*$perPage) . ", $perPage");
+$recup_produit = $pdo -> prepare("SELECT p.id_produit, p.id_salle, DATE_FORMAT(p.date_arrivee, '%d/%m/%Y') as date_arrivee, DATE_FORMAT(p.date_depart, '%d/%m/%Y') as date_depart, p.prix, p.etat FROM produit p, salle s WHERE p.id_salle=s.id_salle AND p.etat = 'libre' AND date_arrivee > CURRENT_DATE " . $where);
 if (isset($_GET['categorie']) && !empty($_GET['categorie'])) {
     $recup_produit -> bindParam(':cat', $_GET['categorie'], PDO::PARAM_STR );
 }
@@ -113,13 +100,3 @@ if(!empty($vide)){
     }
 }
 echo "</div>";
-echo "<div class=\"row\">";
-if ($nbPage > 1) {
-    echo "<ul class=\"pagination\">";
-    for ($i=1; $i <= $nbPage; $i++) {
-        echo "<li><a href=\"index.php?p=". $i . "\">" . $i . "</a></li>";
-    }
-    echo "</ul>";
-}
-echo "</div>";
-
